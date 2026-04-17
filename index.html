@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IA: Do Zero ao Avançado — Curso Completo 2026</title>
+<title>IA: Uma Introdução — Curso 2026</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Mono:wght@400;600&family=Libre+Franklin:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -801,6 +801,249 @@
     opacity: 1;
     transform: none;
   }
+
+  /* ── MODAIS DE FERRAMENTAS ───────────────────────────────────────────────── */
+
+  [data-tool] {
+    cursor: pointer;
+    border-bottom: 1px solid currentColor;
+    transition: background 0.15s, color 0.15s;
+    position: relative;
+  }
+  [data-tool]:hover {
+    background: rgba(200,57,26,0.08);
+    border-radius: 2px;
+  }
+
+  /* Tooltip de hover — preview rápido */
+  #tool-tooltip {
+    position: fixed;
+    z-index: 8000;
+    max-width: 280px;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: var(--sans);
+    font-size: 0.78rem;
+    font-weight: 300;
+    line-height: 1.5;
+    padding: 0.7rem 0.95rem;
+    border-radius: 6px;
+    border-left: 3px solid var(--accent);
+    box-shadow: 0 6px 24px rgba(0,0,0,0.45);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+  }
+  #tool-tooltip.visible { opacity: 1; }
+  #tool-tooltip .tt-name {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent-light);
+    display: block;
+    margin-bottom: 0.3rem;
+  }
+  #tool-tooltip .tt-type {
+    font-family: var(--mono);
+    font-size: 0.58rem;
+    color: rgba(245,240,232,0.45);
+    letter-spacing: 0.06em;
+    display: block;
+    margin-top: 0.3rem;
+  }
+  #tool-tooltip .tt-hint {
+    margin-top: 0.45rem;
+    font-size: 0.7rem;
+    color: rgba(245,240,232,0.4);
+    font-style: italic;
+  }
+
+  /* Modal overlay */
+  #tool-modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 9500;
+    background: rgba(13,13,13,0.7);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+  #tool-modal-overlay.open {
+    display: flex;
+    animation: toolOverlayIn 0.18s ease forwards;
+  }
+  @keyframes toolOverlayIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  #tool-modal {
+    background: var(--paper);
+    color: var(--ink);
+    width: 100%;
+    max-width: 680px;
+    max-height: 88vh;
+    overflow-y: auto;
+    border-radius: 4px;
+    border-top: 4px solid var(--accent);
+    box-shadow: 0 24px 80px rgba(0,0,0,0.5);
+    animation: toolModalIn 0.2s cubic-bezier(0.22,1,0.36,1);
+  }
+  @keyframes toolModalIn {
+    from { opacity: 0; transform: scale(0.96) translateY(12px); }
+    to   { opacity: 1; transform: scale(1)    translateY(0); }
+  }
+
+  .tool-modal-head {
+    padding: 1.75rem 2rem 1.25rem;
+    border-bottom: 1px solid var(--rule);
+    position: sticky;
+    top: 0;
+    background: var(--paper);
+    z-index: 1;
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  .tool-modal-head-text { flex: 1; }
+  .tool-modal-company {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.3rem;
+  }
+  .tool-modal-name {
+    font-family: var(--serif);
+    font-size: 1.7rem;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+  .tool-modal-type {
+    font-family: var(--mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 0.4rem;
+    display: block;
+  }
+  #tool-modal-close {
+    background: none;
+    border: 1px solid var(--rule);
+    color: var(--muted);
+    font-size: 1.1rem;
+    width: 2.2rem;
+    height: 2.2rem;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.15s;
+  }
+  #tool-modal-close:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+
+  .tool-modal-body { padding: 1.75rem 2rem 2rem; }
+
+  .tool-section-label {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.6rem;
+    margin-top: 1.6rem;
+    padding-top: 1.4rem;
+    border-top: 1px solid var(--rule);
+    display: block;
+  }
+  .tool-section-label:first-child { margin-top: 0; padding-top: 0; border-top: none; }
+
+  .tool-modal-desc {
+    font-size: 0.93rem;
+    line-height: 1.7;
+    color: var(--ink);
+    margin-bottom: 0.8rem;
+  }
+  .tool-modal-desc:last-child { margin-bottom: 0; }
+
+  .tool-use-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    margin-bottom: 0.8rem;
+  }
+  .tool-use-list li {
+    font-size: 0.88rem;
+    padding-left: 1.4rem;
+    position: relative;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+  .tool-use-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-family: var(--mono);
+    font-size: 0.8rem;
+  }
+
+  .tool-cross-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 0.5rem;
+  }
+  .tool-chip {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    padding: 0.25rem 0.6rem;
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    color: var(--muted);
+    background: var(--paper-dark);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .tool-chip:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-dim); }
+
+  .tool-url {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--blue);
+    text-decoration: none;
+    margin-top: 0.3rem;
+    display: inline-block;
+  }
+  .tool-url:hover { text-decoration: underline; }
+
+  @media (max-width: 600px) {
+    #tool-modal-overlay { padding: 0; align-items: flex-end; }
+    #tool-modal {
+      max-width: 100%;
+      border-radius: 16px 16px 0 0;
+      max-height: 90vh;
+      animation: toolSheetUp 0.22s cubic-bezier(0.22,1,0.36,1);
+    }
+    @keyframes toolSheetUp {
+      from { transform: translateY(100%); }
+      to   { transform: translateY(0); }
+    }
+  }
 </style>
 </head>
 <body>
@@ -809,8 +1052,17 @@
 <button id="sidebar-toggle" onclick="toggleSidebar()">☰ MENU</button>
 
 <nav id="sidebar">
-  <div class="sidebar-logo">IA: Do Zero ao Avançado · 2026</div>
+  <div class="sidebar-logo">IA: Uma Introdução · 2026</div>
   <div class="sidebar-module"><a href="#hero">↑ Início</a></div>
+  <div class="sidebar-module">
+    <a href="#modulo0">MÓDULO 0</a>
+    <div class="sidebar-sub">
+      <a href="#modulo0">Antes de Começar</a>
+      <a href="#m0-imposicao">A Imposição Tecnológica</a>
+      <a href="#m0-riscos">Riscos Psíquicos & Éticos</a>
+      <a href="#m0-perfil">Perfilamento & Poder</a>
+    </div>
+  </div>
   <div class="sidebar-module">
     <a href="#modulo1">MÓDULO 1</a>
     <div class="sidebar-sub">
@@ -873,11 +1125,11 @@
 
 <div id="main">
   <header id="hero">
-    <p class="hero-kicker">Curso Completo · Edição Abril 2026</p>
-    <h1 class="hero-title">Inteligência Artificial:<br><em>Do zero ao avançado</em></h1>
-    <p class="hero-subtitle">Um curso completo e progressivo para compreender o cenário atual da IA — dos fundamentos técnicos às disputas geopolíticas, dos agentes autônomos aos riscos reais de segurança e privacidade.</p>
+    <p class="hero-kicker">Curso · Edição Abril 2026</p>
+    <h1 class="hero-title">Inteligência Artificial:<br><em>Uma introdução</em></h1>
+    <p class="hero-subtitle">Um curso progressivo para compreender o cenário atual da IA — dos fundamentos técnicos às disputas geopolíticas, dos agentes autônomos aos riscos reais de segurança e privacidade.</p>
     <div class="hero-meta">
-      <div class="hero-badge">Módulos<strong>7 módulos</strong></div>
+      <div class="hero-badge">Módulos<strong>8 módulos</strong></div>
       <div class="hero-badge">Nível<strong>Iniciante → Avançado</strong></div>
       <div class="hero-badge">Atualizado em<strong>Abril de 2026</strong></div>
       <div class="hero-badge">Idioma<strong>Português Brasileiro</strong></div>
@@ -889,6 +1141,11 @@
   </div>
 
   <nav id="toc">
+    <a href="#modulo0" class="toc-card fade-in">
+      <div class="toc-num">Módulo 00</div>
+      <div class="toc-title">Antes de Começar: Ética, Risco & Discernimento</div>
+      <div class="toc-level" style="color:var(--muted);border-color:var(--muted);">⚑ Transversal</div>
+    </a>
     <a href="#modulo1" class="toc-card fade-in">
       <div class="toc-num">Módulo 01</div>
       <div class="toc-title">Panorama Atual da IA</div>
@@ -935,6 +1192,97 @@
       <div class="toc-level level-beginner">🔤 A-Z</div>
     </a>
   </nav>
+
+  <!-- ═══════════════════════════════════════════
+       MÓDULO 0 — ANTES DE COMEÇAR
+  ═══════════════════════════════════════════ -->
+  <section class="module" id="modulo0">
+    <div class="module-header fade-in">
+      <div class="module-num">00</div>
+      <div class="module-title-wrap">
+        <div class="module-kicker">Módulo Zero</div>
+        <h2 class="module-title">Antes de Começar:<br>Ética, Risco & Discernimento</h2>
+        <span class="module-level" style="color:var(--muted);border-color:var(--muted);">⚑ Leitura Transversal</span>
+      </div>
+    </div>
+
+    <div class="prose fade-in">
+      <p>Este curso é sobre compreender a inteligência artificial — mas antes de qualquer mapa do território, é necessário nomear o terreno em que você já está. Você não chegou aqui neutro. Chegou com um smartphone no bolso, com feeds curados por algoritmos, com uma rotina que já foi parcialmente reorganizada por sistemas que otimizam seu comportamento sem pedir licença. A IA não é uma novidade que está chegando: ela já governa silenciosamente partes substanciais da experiência cotidiana. A questão não é mais <em>se adotar</em>, mas como habitar esse mundo com clareza e sem perder o eixo.</p>
+      <p>A urgência desta leitura, portanto, não é técnica. É de ordem filosófica e prática ao mesmo tempo.</p>
+    </div>
+
+    <h3 class="section-title fade-in" id="m0-imposicao">A Imposição Tecnológica — Quando a Escolha Não É Livre</h3>
+
+    <div class="prose fade-in">
+      <p>Há uma narrativa recorrente de que a adoção de novas tecnologias é uma questão de <em>escolha</em>. Você escolhe usar o ChatGPT, você decide automatizar sua planilha, você opta por um assistente de voz. Mas essa narrativa ignora uma estrutura de pressão real e crescente: o mercado de trabalho já penaliza quem não usa IA, os sistemas educacionais pressionam por "competências digitais", e a própria infraestrutura cotidiana — do banco ao serviço de saúde — integra camadas de automação que o usuário não vê e não controla.</p>
+      <p>Não se trata de paranoia: trata-se de reconhecer que vivemos em um mundo de urgências empilhadas, onde a velocidade se tornou um valor em si. Num ambiente assim, ferramentas que prometem eficiência são adotadas antes que seus custos sejam compreendidos. A lógica do mercado captura os corpos e as mentes antes que qualquer deliberação coletiva seja possível.</p>
+    </div>
+
+    <div class="callout callout-warn fade-in">
+      <div class="callout-label">⚠️ A assimetria de poder</div>
+      <p>As ferramentas de IA são desenvolvidas por um número muito pequeno de corporações, predominantemente americanas, com recursos computacionais que nenhum Estado nacional — exceto os EUA e a China — consegue rivalizar. Isso significa que as regras do que a IA pode ou não fazer, o que ela valoriza, o que ela censura, o que ela amplifica, são definidas por um conjunto restrito de decisores privados. Adotar essas ferramentas sem essa consciência é, em alguma medida, abrir mão de soberania.</p>
+    </div>
+
+    <h3 class="section-title fade-in" id="m0-riscos">Riscos Psíquicos, Morais & Emocionais</h3>
+
+    <div class="prose fade-in">
+      <p>O risco mais imediato e menos discutido não é o da substituição de empregos. É o da substituição de processos cognitivos internos pela terceirização para sistemas externos.</p>
+      <p><strong>Soberania cognitiva</strong> é a capacidade de pensar por conta própria — de formular perguntas, sustentar dúvidas, tolerar a incerteza de não saber, e chegar a conclusões através de um processo que pertence genuinamente ao pensador. Quando esse processo é sistematicamente delegado a uma IA que produz respostas instantâneas, articuladas e com aparência de autoridade, algo se perde. Não de uma vez — gradualmente, como um músculo que atrofia por falta de uso.</p>
+      <p>Isso não é especulação filosófica abstrata. Já há pesquisas documentando o que chama de <em>cognitive offloading</em> — a tendência crescente de não reter informações ou resolver problemas porque existe um dispositivo que faz isso. A IA generativa potencializa esse fenômeno de forma qualitativa: não apenas armazena dados, mas <em>raciocina</em> (ou simula raciocínio) em seu lugar.</p>
+    </div>
+
+    <div class="callout callout-danger fade-in">
+      <div class="callout-label">🧠 Dependência emocional de chatbots</div>
+      <p>Produtos como o <em>Character.ai</em>, o modo de voz do ChatGPT e versões mais recentes de assistentes conversacionais são projetados explicitamente para aumentar engajamento — e engajamento, no vocabulário da indústria, significa tempo de uso. Para isso, esses sistemas são treinados para ser acolhedores, validadores e presentes. Estudos indicam que usuários em vulnerabilidade emocional — adolescentes, pessoas em isolamento, indivíduos com histórico de depressão — desenvolvem vínculos afetivos com esses sistemas que podem substituir, em vez de complementar, conexões humanas. Há casos documentados de jovens que revelaram pensamentos suicidas a chatbots antes de revelar a qualquer pessoa real. A arquitetura de engajamento foi pensada para manter o usuário na plataforma — não para cuidar de sua saúde mental.</p>
+    </div>
+
+    <div class="prose fade-in">
+      <p>Além do vínculo emocional, há um risco moral mais sutil: a <strong>erosão da tolerância à ambiguidade</strong>. Uma IA bem treinada raramente diz "não sei" de forma honesta — ela produz uma resposta coerente mesmo quando o terreno é incerto. Usuários habituados a esse padrão tendem a perder a capacidade de sentar com a incerteza, de formular hipóteses rivais, de reconhecer a complexidade como valor cognitivo em si mesma. A IA não forma caracteres — mas pode deformá-los, se usada sem consciência.</p>
+      <p>Há, por fim, o risco do <strong>isolamento amplificado</strong>. As telas já haviam reorganizado a sociabilidade humana antes da IA generativa: redes sociais substituíram comunidades presenciais, feeds algorítmicos substituíram conversas abertas, a atenção fragmentou-se em microinterações. O chatbot amigável é o passo seguinte dessa trajetória — uma voz que nunca cansa, nunca discorda de verdade, nunca exige nada. Para quem já vive numa estrutura de isolamento crescente, essa "voz amiga" pode ser uma armadilha sedutora.</p>
+    </div>
+
+    <div class="callout callout-info fade-in">
+      <div class="callout-label">📌 Nota sobre design de engajamento</div>
+      <p>Plataformas de IA são, em última análise, produtos comerciais. Seu modelo de negócios depende de uso recorrente. Isso cria um incentivo estrutural para que sejam projetadas para seduzir, não para empoderar. A diferença entre uma ferramenta que te torna mais capaz e uma plataforma que te torna mais dependente é sutil na experiência — mas fundamental nas consequências.</p>
+    </div>
+
+    <h3 class="section-title fade-in" id="m0-perfil">Perfilamento Comportamental, Retroalimentação & Riscos Políticos</h3>
+
+    <div class="prose fade-in">
+      <p>Cada interação com um sistema de IA é também um ato de produção de dados. O que você pergunta, como pergunta, o que aceita como resposta, onde hesita, onde volta atrás — tudo isso é registrado e, em graus variados conforme a plataforma e os termos de uso, utilizado. O <strong>perfilamento comportamental</strong> não é uma novidade da era da IA — existe desde os primeiros algoritmos de recomendação do Google e do Facebook. Mas a IA generativa aprofunda essa dinâmica de formas qualitativas novas.</p>
+      <p>Quando você conversa com um chatbot sobre saúde, sobre política, sobre seus medos ou seus projetos, você não está apenas usando uma ferramenta. Você está fornecendo dados de altíssima resolução sobre sua estrutura cognitiva, seus valores, suas vulnerabilidades e seus pontos de resistência. Esses dados, agregados em escala, compõem perfis comportamentais de precisão sem precedente histórico.</p>
+    </div>
+
+    <div class="analogy fade-in">
+      <p><strong>O problema da retroalimentação:</strong> modelos de linguagem são treinados, em parte, com conteúdo gerado por outros modelos de linguagem. À medida que o conteúdo da internet é crescentemente produzido por IA — artigos, comentários, análises, resumos — os novos modelos treinados nesse corpus absorvem não apenas o conhecimento humano original, mas os padrões, vieses e simplificações produzidos pelas gerações anteriores de IA. Isso cria uma espiral de retroalimentação em que os modelos se tornam progressivamente mais sofisticados na superfície e potencialmente mais homogeneizados na substância. Chama-se a isso <em>model collapse</em> na literatura técnica — um horizonte ainda debatido, mas levado a sério por pesquisadores.</p>
+    </div>
+
+    <div class="prose fade-in">
+      <p>Os riscos políticos e ideológicos desse cenário são concretos. Sistemas de recomendação já demonstraram capacidade de <strong>influenciar eleições</strong> ao amplificar conteúdo polarizante de forma algorítmica — não por intenção maliciosa, mas porque polarização gera engajamento e engajamento é o que o algoritmo otimiza. A IA generativa adiciona a isso a capacidade de produzir conteúdo persuasivo personalizado em escala, adaptado ao perfil específico de cada indivíduo.</p>
+      <p>Isso não significa que toda IA é uma conspiração política. Significa que as arquiteturas de incentivo que governam esses sistemas — maximizar uso, maximizar engajamento, maximizar dados coletados — são estruturalmente incompatíveis com valores como deliberação democrática, diversidade epistêmica e autonomia individual. O conflito não precisa ser intencional para ser real.</p>
+    </div>
+
+    <div class="callout callout-danger fade-in">
+      <div class="callout-label">⚠️ O perfilamento como infraestrutura de poder</div>
+      <p>Quando perfis comportamentais detalhados existem sobre centenas de milhões de pessoas — incluindo suas incertezas políticas, suas ansiedades econômicas, seus padrões de dúvida — esses perfis tornam-se infraestrutura de poder. Quem os possui pode não apenas <em>prever</em> comportamento coletivo, mas <em>induzi-lo</em>: calibrando quais informações chegam a quem, em qual momento, com qual enquadramento. Esse poder não precisa ser exercido de forma centralizada e visível para ser efetivo. Sua eficácia está justamente na invisibilidade.</p>
+    </div>
+
+    <div class="prose fade-in">
+      <p>Nada disso é argumento para não usar IA. É argumento para usar com olhos abertos — reconhecendo que cada ferramenta carrega uma filosofia embutida, que conveniência tem custos não anunciados, e que discernimento é uma habilidade que precisa ser cultivada ativamente num ambiente projetado para reduzi-la.</p>
+      <p>Os módulos que se seguem descrevem o funcionamento técnico, os ecossistemas e os casos reais desse universo. Mas este módulo é o pré-requisito de todos eles: a disposição de não tomar como neutro aquilo que nunca foi.</p>
+    </div>
+
+    <div class="module-summary fade-in">
+      <ul class="summary-points">
+        <li>A adoção da IA raramente é uma escolha livre — é estruturada por pressões de mercado, trabalho e infraestrutura que operam antes de qualquer deliberação consciente.</li>
+        <li>Soberania cognitiva — a capacidade de pensar por conta própria — pode ser erodida gradualmente pela terceirização sistemática de processos mentais para sistemas externos.</li>
+        <li>Chatbots são projetados para maximizar engajamento, não bem-estar; pessoas em vulnerabilidade emocional são particularmente expostas a dependências prejudiciais.</li>
+        <li>Perfilamento comportamental de alta resolução é uma consequência estrutural do uso de IA — os dados produzidos por suas interações compõem infraestruturas de poder concretas.</li>
+        <li>A retroalimentação entre conteúdo gerado por IA e novos ciclos de treinamento representa um risco de homogeneização epistêmica ainda não totalmente compreendido.</li>
+        <li>Discernimento não é rejeição — é a condição mínima para um uso que expanda, em vez de diminuir, a autonomia humana.</li>
+      </ul>
+    </div>
+  </section>
 
   <!-- ═══════════════════════════════════════════
        MÓDULO 1 — PANORAMA ATUAL (COMPLETO)
@@ -1509,6 +1857,29 @@
   </footer>
 </div>
 
+<!-- ── TOOL TOOLTIP (hover preview) ─────────────────────────────── -->
+<div id="tool-tooltip" role="tooltip">
+  <span class="tt-name"></span>
+  <span class="tt-body"></span>
+  <span class="tt-type"></span>
+  <span class="tt-hint">clique para detalhes completos</span>
+</div>
+
+<!-- ── TOOL MODAL (click completo) ──────────────────────────────── -->
+<div id="tool-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="tool-modal-title">
+  <div id="tool-modal">
+    <div class="tool-modal-head">
+      <div class="tool-modal-head-text">
+        <div class="tool-modal-company" id="tool-modal-company"></div>
+        <h2 class="tool-modal-name" id="tool-modal-title"></h2>
+        <span class="tool-modal-type" id="tool-modal-type"></span>
+      </div>
+      <button id="tool-modal-close" aria-label="Fechar">✕</button>
+    </div>
+    <div class="tool-modal-body" id="tool-modal-body"></div>
+  </div>
+</div>
+
 <script>
 
   window.addEventListener('scroll', () => {
@@ -1934,6 +2305,777 @@
       if (link.getAttribute('href') === '#' + current) link.classList.add('active');
     });
   });
+
+  // ══════════════════════════════════════════════════════════════════════════
+  // MODAIS DE FERRAMENTAS
+  // ══════════════════════════════════════════════════════════════════════════
+  (function initToolModals() {
+
+    // ── BASE DE DADOS DAS FERRAMENTAS ─────────────────────────────────────
+    const TOOLS = {
+      chatgpt: {
+        name: 'ChatGPT',
+        company: 'OpenAI',
+        type: 'Aplicativo consumidor · Chat & Agentes',
+        url: 'https://chatgpt.com',
+        preview: 'Aplicativo de chat mais usado no mundo, com acesso a GPT-4o e ferramentas agênticas.',
+        desc: [
+          'ChatGPT é o produto de interface mais usado no mundo para interação com modelos de linguagem. Lançado em novembro de 2022, acelerou a adoção pública de IA generativa de forma sem precedente histórico.',
+          'A versão gratuita oferece acesso ao modelo GPT-4o Mini e funcionalidades básicas de chat. Os planos pagos (Plus, Pro) dão acesso ao GPT-4o, GPT-4.5 e modelos de raciocínio da família "o3/o4", além de capacidade de geração de imagens (DALL-E), análise de arquivos e memória de longo prazo.',
+          'A partir de 2025, ChatGPT integrou capacidades agênticas via "Operator" e "Tasks" — permitindo que o modelo navegue em sites, preencha formulários e execute sequências de ações no computador do usuário com supervisão mínima.'
+        ],
+        uses: [
+          'Redação, revisão e tradução de textos',
+          'Geração e depuração de código em diversas linguagens',
+          'Análise e síntese de documentos longos (PDFs, planilhas)',
+          'Assistência em pesquisa com busca na web em tempo real',
+          'Geração de imagens via DALL-E integrado',
+          'Automação de tarefas via modo Operator/agêntico'
+        ],
+        cross: ['openai-api', 'gpt-model', 'dalle', 'operator', 'claude-ai', 'gemini-app', 'perplexity']
+      },
+      'openai-api': {
+        name: 'OpenAI API',
+        company: 'OpenAI',
+        type: 'API · Acesso programático aos modelos OpenAI',
+        url: 'https://platform.openai.com',
+        preview: 'Porta de acesso programático a todos os modelos OpenAI — GPT, DALL-E, Whisper, TTS e mais.',
+        desc: [
+          'A OpenAI API é a interface programática que permite a desenvolvedores e empresas integrar os modelos da OpenAI em suas próprias aplicações, produtos e fluxos de trabalho.',
+          'Oferece acesso a toda a família de modelos: GPT (texto/chat), DALL-E (imagens), Whisper (transcrição de áudio), TTS (síntese de voz), e modelos de embeddings para busca semântica.',
+          'A precificação é por token consumido — tanto no input (prompt) quanto no output (resposta). Modelos de raciocínio da série "o3/o4" têm custo maior mas capacidades analíticas superiores para problemas complexos.'
+        ],
+        uses: [
+          'Construção de chatbots e assistentes customizados',
+          'Análise de documentos em escala (contratos, relatórios)',
+          'Pipelines de processamento de linguagem natural',
+          'Geração de conteúdo automatizada',
+          'Busca semântica com embeddings',
+          'Transcrição e síntese de áudio'
+        ],
+        cross: ['chatgpt', 'gpt-model', 'anthropic-api', 'google-ai-studio', 'vertex-ai']
+      },
+      'gpt-model': {
+        name: 'GPT-5.4 / o3 / o4',
+        company: 'OpenAI',
+        type: 'Modelo de linguagem · Família GPT',
+        url: 'https://openai.com/research',
+        preview: 'Família de modelos de linguagem da OpenAI — da geração padrão (GPT) aos modelos de raciocínio (o-series).',
+        desc: [
+          'A família GPT da OpenAI compreende modelos de diferentes capacidades e custos. Os modelos "GPT-4o" e "GPT-5.x" são otimizados para velocidade e custo-benefício em uso cotidiano; os modelos da série "o" (o1, o3, o4) são projetados especificamente para raciocínio profundo, com cadeia de pensamento interna.',
+          'Os modelos "o-series" dedicam tempo de computação extra para "pensar" antes de responder — o que melhora significativamente desempenho em matemática, programação complexa, ciência e lógica formal, a custo de maior latência e preço por token.',
+          'GPT-4o é nativo multimodal: processa e gera texto, imagens e áudio em uma única arquitetura unificada, sem pipelines separados para cada modalidade.'
+        ],
+        uses: [
+          'Análise de problemas complexos (o3/o4)',
+          'Geração de código e debugging avançado',
+          'Raciocínio matemático e científico',
+          'Processamento multimodal (texto + imagem + áudio)',
+          'Base para fine-tuning em domínios especializados'
+        ],
+        cross: ['chatgpt', 'openai-api', 'claude-model', 'gemini-model', 'deepseek']
+      },
+      operator: {
+        name: 'Operator / OpenAI Agents',
+        company: 'OpenAI',
+        type: 'Agente · Automação de tarefas no computador',
+        url: 'https://openai.com/operator',
+        preview: 'Agente da OpenAI capaz de operar navegadores e executar tarefas complexas de forma autônoma.',
+        desc: [
+          'Operator é o produto agêntico da OpenAI que permite ao GPT-4o navegar em sites, clicar em elementos, preencher formulários, fazer compras e executar sequências de ações em interfaces web reais — sem que o usuário precise fazer cada passo manualmente.',
+          'É uma das primeiras implementações comerciais de "computer use" — a capacidade de uma IA de interagir com interfaces gráficas como um humano faria, usando visão computacional para interpretar a tela.',
+          'Apresenta riscos específicos de segurança: sites maliciosos podem tentar injetar instruções para o agente através de conteúdo na página (prompt injection). A OpenAI implementa guardrails, mas o vetor de ataque permanece ativo.'
+        ],
+        uses: [
+          'Automação de compras online recorrentes',
+          'Preenchimento de formulários e cadastros',
+          'Pesquisa web com interação em múltiplos sites',
+          'Execução de fluxos de trabalho multi-etapa',
+          'Teste automatizado de interfaces web'
+        ],
+        cross: ['chatgpt', 'gpt-model', 'claude-code', 'mcp', 'devin']
+      },
+      'claude-ai': {
+        name: 'Claude.ai',
+        company: 'Anthropic',
+        type: 'Aplicativo consumidor · Chat',
+        url: 'https://claude.ai',
+        preview: 'Interface de chat da Anthropic para acesso ao Claude — com Projects, memória e artefatos interativos.',
+        desc: [
+          'Claude.ai é o produto de interface para usuários finais da Anthropic. Disponível em planos gratuito, Pro e Team, dá acesso às versões Sonnet e Opus da família Claude.',
+          'Funcionalidades diferenciadoras incluem: "Projects" (contexto persistente por projeto, com arquivos e instruções fixas), geração de "Artifacts" (componentes interativos que podem ser código, SVG, React ou HTML rodando inline), memória de preferências do usuário, e integração com ferramentas externas via MCP.',
+          'A Anthropic posiciona Claude como um assistente com maior atenção a segurança e redução de danos — o que na prática significa maiores recusas em alguns contextos, mas também respostas mais calibradas em tópicos sensíveis.'
+        ],
+        uses: [
+          'Redação, análise e síntese de documentos longos',
+          'Geração de código com execução inline',
+          'Pesquisa e síntese com busca na web',
+          'Trabalho em projetos com contexto persistente',
+          'Criação de interfaces interativas via Artifacts'
+        ],
+        cross: ['claude-model', 'anthropic-api', 'claude-code', 'mcp', 'chatgpt', 'gemini-app']
+      },
+      'anthropic-api': {
+        name: 'Anthropic API',
+        company: 'Anthropic',
+        type: 'API · Acesso programático ao Claude',
+        url: 'https://console.anthropic.com',
+        preview: 'Acesso programático à família Claude para construção de aplicações, agentes e pipelines.',
+        desc: [
+          'A Anthropic API oferece acesso à família completa de modelos Claude — Haiku (leve e rápido), Sonnet (equilíbrio custo-capacidade) e Opus (máxima capacidade) — via chamadas HTTP padrão.',
+          'Recursos específicos incluem: janela de contexto de até 1 milhão de tokens, cache de prompt (reduz custo em prompts longos repetitivos), suporte nativo a tool use/function calling, e integração com o Model Context Protocol (MCP) para conexão com ferramentas externas.',
+          'A API da Anthropic é amplamente usada por empresas que precisam de modelos com forte alinhamento de segurança e previsibilidade comportamental em produção.'
+        ],
+        uses: [
+          'Aplicações com documentos muito longos (contratos, códigos extensos)',
+          'Pipelines de análise com tool use',
+          'Agentes conectados a ferramentas via MCP',
+          'Fine-tuning e personalização via system prompts',
+          'Integração em produtos SaaS'
+        ],
+        cross: ['claude-model', 'claude-ai', 'mcp', 'openai-api', 'google-ai-studio']
+      },
+      'claude-model': {
+        name: 'Claude Sonnet 4.6 / Opus 4.6',
+        company: 'Anthropic',
+        type: 'Modelo de linguagem · Família Claude',
+        url: 'https://anthropic.com/claude',
+        preview: 'Família de modelos da Anthropic com foco em segurança, raciocínio e contextos muito longos.',
+        desc: [
+          'A família Claude 4.x compreende três modelos com diferentes trocas de capacidade/custo: Haiku (velocidade e custo mínimo), Sonnet (equilíbrio para uso intensivo) e Opus (máxima capacidade analítica).',
+          'Características técnicas diferenciadoras: janela de contexto de 1 milhão de tokens (um dos maiores do mercado), forte desempenho em raciocínio multi-etapa, análise de documentos e código. Internamente, pesquisas da Anthropic documentaram que os modelos desenvolvem representações funcionais de estados emocionais como subproduto do treinamento.',
+          'Treinado com ênfase em segurança via RLHF e técnicas proprietárias de alinhamento (Constitutional AI), o Claude tende a ser mais cauteloso em domínios de risco — o que pode ser vantagem ou limitação conforme o caso de uso.'
+        ],
+        uses: [
+          'Análise de documentos muito longos',
+          'Raciocínio jurídico, científico e técnico',
+          'Programação e revisão de código',
+          'Assistentes com alta exigência de segurança',
+          'Processamento em escala via API'
+        ],
+        cross: ['claude-ai', 'anthropic-api', 'claude-code', 'gpt-model', 'gemini-model']
+      },
+      'claude-code': {
+        name: 'Claude Code',
+        company: 'Anthropic',
+        type: 'Agente · Programação autônoma via CLI',
+        url: 'https://claude.ai/code',
+        preview: 'Agente de engenharia de software que opera no terminal — lê, escreve e executa código autonomamente.',
+        desc: [
+          'Claude Code é um agente de engenharia de software que opera diretamente na linha de comando. Diferente de assistentes de código que sugerem trechos, Claude Code lê a estrutura completa de um repositório, entende o contexto do projeto, escreve código, executa testes, corrige erros e itera — de forma autônoma.',
+          'Trabalha com o sistema de arquivos real do usuário, podendo criar, editar e deletar arquivos, executar comandos no terminal, instalar dependências e usar ferramentas externas via MCP.',
+          'É considerado uma das implementações mais avançadas de "software engineer" autônomo disponíveis comercialmente, com capacidade demonstrada de resolver issues reais de engenharia de ponta a ponta.'
+        ],
+        uses: [
+          'Desenvolvimento autônomo de features e correção de bugs',
+          'Refatoração e modernização de codebases legadas',
+          'Escrita e manutenção de testes automatizados',
+          'Migração entre frameworks ou linguagens',
+          'Análise e documentação automática de código'
+        ],
+        cross: ['claude-model', 'anthropic-api', 'mcp', 'operator', 'devin', 'github-copilot']
+      },
+      mcp: {
+        name: 'MCP — Model Context Protocol',
+        company: 'Anthropic (padrão aberto)',
+        type: 'Protocolo · Integração de agentes com ferramentas externas',
+        url: 'https://modelcontextprotocol.io',
+        preview: 'Protocolo aberto que conecta modelos de IA a ferramentas externas — com 97M de instalações, tornou-se o padrão de mercado.',
+        desc: [
+          'O Model Context Protocol (MCP) é uma especificação aberta criada pela Anthropic que define como modelos de linguagem se comunicam com ferramentas externas — sistemas de arquivos, bancos de dados, APIs, calendários, ambientes de código, e praticamente qualquer serviço digitalizado.',
+          'A analogia mais precisa é um conector USB universal para IAs: qualquer desenvolvedor pode criar um "servidor MCP" que expõe as capacidades de seu produto, e qualquer modelo compatível (Claude, GPT, Gemini, etc.) pode usar esse servidor sem configuração adicional.',
+          'Com mais de 97 milhões de instalações registradas até abril de 2026, tornou-se o padrão de facto para integração de agentes. Empresas como GitHub, Google, Atlassian, Stripe e centenas de outras publicaram servidores MCP oficiais.'
+        ],
+        uses: [
+          'Conectar agentes a sistemas de arquivos locais ou na nuvem',
+          'Integrar IA com bases de dados e ERPs corporativos',
+          'Permitir que Claude/GPT use ferramentas como GitHub, Jira, Slack',
+          'Construir pipelines de automação multi-ferramenta',
+          'Padronizar integrações de IA em organizações'
+        ],
+        cross: ['claude-code', 'anthropic-api', 'operator', 'claude-ai', 'n8n']
+      },
+      'gemini-app': {
+        name: 'Gemini App',
+        company: 'Google',
+        type: 'Aplicativo consumidor · Chat & integração Google',
+        url: 'https://gemini.google.com',
+        preview: 'Aplicativo de chat do Google, integrado ao ecossistema Gmail, Drive, Docs e Workspace.',
+        desc: [
+          'O Gemini App é a interface de chat da Google para usuários finais, disponível em versão gratuita (modelo Flash) e paga via Google One AI Premium (modelo Pro/Ultra). É integrado nativamente ao ecossistema Google — Gmail, Google Drive, Docs, Sheets, Meet.',
+          'O diferencial competitivo do Gemini App está precisamente nessa integração: pode ler e-mails, resumir documentos no Drive, auxiliar em Google Docs em tempo real, e integrar-se com produtos de busca, Maps e YouTube.',
+          'Em dispositivos Android, está progressivamente substituindo o Google Assistente como camada de interface inteligente, com acesso a dados do dispositivo e capacidade de executar ações no sistema.'
+        ],
+        uses: [
+          'Assistência no Gmail (resposta, síntese, triagem)',
+          'Edição e geração de conteúdo no Google Docs/Sheets',
+          'Busca com compreensão semântica via Google Search',
+          'Resumo e organização de conteúdo do Google Drive',
+          'Assistente no Android com acesso ao dispositivo'
+        ],
+        cross: ['gemini-model', 'google-ai-studio', 'vertex-ai', 'claude-ai', 'chatgpt']
+      },
+      'gemini-model': {
+        name: 'Gemini 3.1 Pro / Flash / Ultra',
+        company: 'Google DeepMind',
+        type: 'Modelo de linguagem · Família Gemini',
+        url: 'https://deepmind.google/technologies/gemini',
+        preview: 'Família de modelos do Google — nativamente multimodal, com janela de 1M de tokens e integração com buscas em tempo real.',
+        desc: [
+          'A família Gemini é desenvolvida pelo Google DeepMind e representa a consolidação da estratégia de IA do Google após a fusão de equipes de pesquisa. Os modelos são nativamente multimodais — treinados desde o início para processar texto, imagens, áudio, vídeo e código em uma única arquitetura.',
+          'Destaque técnico: janela de contexto de 1 milhão de tokens (um dos maiores do mercado, equivalente a aproximadamente 700.000 palavras), com variantes Flash (rápida e barata) e Pro/Ultra (máxima capacidade).',
+          'A integração com a infraestrutura de busca do Google permite que Gemini acesse informações em tempo real de forma mais fluida que concorrentes — uma vantagem estrutural que outros modelos não têm sem plugins adicionais.'
+        ],
+        uses: [
+          'Análise de documentos muito longos ou vídeos inteiros',
+          'Perguntas com resposta em tempo real via Google Search',
+          'Processamento multimodal (texto + imagem + áudio + vídeo)',
+          'Aplicações corporativas via Vertex AI',
+          'Desenvolvimento com Gemma (versão open-weight)'
+        ],
+        cross: ['gemini-app', 'google-ai-studio', 'vertex-ai', 'gemma', 'claude-model', 'gpt-model']
+      },
+      'google-ai-studio': {
+        name: 'Google AI Studio',
+        company: 'Google',
+        type: 'Interface de desenvolvimento · Prototipagem e API',
+        url: 'https://aistudio.google.com',
+        preview: 'Bancada de laboratório para desenvolvedores — acesso direto aos modelos Gemini com controle de parâmetros e system prompts.',
+        desc: [
+          'Google AI Studio é a interface voltada para desenvolvedores e pesquisadores que precisam de acesso mais direto e configurável aos modelos Gemini — em contraste com o Gemini App, que é projetado para usuários finais.',
+          'Permite ajuste de parâmetros técnicos como temperatura, top-p e tamanho máximo de resposta; edição de system prompts; testes com múltiplas variantes em paralelo (comparação A/B); e acesso direto à API key para integração em projetos.',
+          'É gratuito até certos limites de uso, tornando-o muito acessível para prototipagem e aprendizado. Para produção em escala, os projetos migram para o Vertex AI com faturamento por token.'
+        ],
+        uses: [
+          'Prototipagem rápida de aplicações com Gemini',
+          'Testes e comparação de prompts em diferentes modelos',
+          'Exploração de capacidades técnicas dos modelos',
+          'Geração de API key para integração em código',
+          'Experimentos com entradas multimodais (imagem, áudio, vídeo)'
+        ],
+        cross: ['gemini-model', 'vertex-ai', 'gemini-app', 'openai-api', 'anthropic-api']
+      },
+      'vertex-ai': {
+        name: 'Vertex AI',
+        company: 'Google Cloud',
+        type: 'Plataforma corporativa · MLOps e modelos em produção',
+        url: 'https://cloud.google.com/vertex-ai',
+        preview: 'Plataforma corporativa do Google para modelos em produção — com governança, compliance e integração com GCP.',
+        desc: [
+          'Vertex AI é a plataforma de machine learning em produção do Google Cloud. Combina acesso aos modelos Gemini com infraestrutura corporativa completa: pipelines de ML, treinamento customizado, versionamento de modelos, monitoramento de desempenho e controles de governance.',
+          'Para empresas, o Vertex AI oferece garantias que o Google AI Studio não oferece: SLAs de disponibilidade, isolamento de dados por projeto, controle de acesso granular (IAM), conformidade com regulações como GDPR e SOC2, e suporte enterprise.',
+          'Suporta não apenas os modelos Gemini, mas também modelos de terceiros disponíveis no Model Garden, e permite fine-tuning com dados proprietários dentro do ambiente seguro do GCP.'
+        ],
+        uses: [
+          'Deploy de modelos Gemini em produção corporativa',
+          'Fine-tuning com dados proprietários da empresa',
+          'Pipelines de processamento de dados com IA em escala',
+          'Integração com outros serviços Google Cloud (BigQuery, Cloud Storage)',
+          'Conformidade e governance para setores regulados'
+        ],
+        cross: ['gemini-model', 'google-ai-studio', 'openai-api', 'anthropic-api']
+      },
+      gemma: {
+        name: 'Gemma 4',
+        company: 'Google DeepMind',
+        type: 'Modelo open-weight · Uso local e fine-tuning',
+        url: 'https://ai.google.dev/gemma',
+        preview: 'Família de modelos open-weight do Google — leve o suficiente para rodar localmente, derivado da arquitetura Gemini.',
+        desc: [
+          'Gemma é a família de modelos open-weight do Google, construída sobre a mesma pesquisa e arquitetura do Gemini, mas com pesos publicamente disponíveis para download e uso local.',
+          'Disponível em versões de 2B, 7B e 27B parâmetros, é projetado para ser eficiente em hardware acessível — incluindo rodar em laptops com GPU dedicada ou até CPU em alguns casos menores.',
+          'Por ser open-weight, pode ser customizado via fine-tuning com dados proprietários, implantado em ambientes offline (sem dependência de internet), e integrado em produtos sem custos por token.'
+        ],
+        uses: [
+          'Execução local sem envio de dados para servidores externos',
+          'Fine-tuning em domínios especializados (saúde, direito, etc.)',
+          'Prototipagem de baixo custo',
+          'Deployment em edge devices e ambientes restritos',
+          'Pesquisa acadêmica e experimentação'
+        ],
+        cross: ['gemini-model', 'deepseek', 'qwen', 'ollama', 'lm-studio']
+      },
+      perplexity: {
+        name: 'Perplexity',
+        company: 'Perplexity AI',
+        type: 'Aplicativo · Motor de busca conversacional',
+        url: 'https://perplexity.ai',
+        preview: 'Mecanismo de busca com IA que agrega múltiplos modelos e cita fontes em tempo real.',
+        desc: [
+          'Perplexity é um mecanismo de busca conversacional que combina recuperação de informações em tempo real com síntese por modelos de linguagem. Diferente do ChatGPT ou Claude, é projetado especificamente para pesquisa — cada resposta inclui citações verificáveis das fontes usadas.',
+          'Internamente usa uma combinação de modelo próprio (Sonar) e, nos planos pagos, acesso a GPT-4o, Claude e outros modelos avançados para síntese. O pipeline é: busca web → recuperação de fontes relevantes → síntese pelo LLM com citações → resposta.',
+          'Recurso "Deep Research" lança um agente que conduz pesquisa autônoma em múltiplas fontes durante minutos, produzindo relatórios estruturados com dezenas de citações — útil para due diligence, análise competitiva e revisão de literatura.'
+        ],
+        uses: [
+          'Pesquisa acadêmica e revisão de literatura com citações',
+          'Verificação de fatos e checagem de informações atuais',
+          'Análise competitiva e due diligence de empresas',
+          'Alternativa ao Google para perguntas complexas',
+          'Deep Research para relatórios aprofundados automatizados'
+        ],
+        cross: ['chatgpt', 'claude-ai', 'gemini-app', 'openai-api']
+      },
+      deepseek: {
+        name: 'DeepSeek V3 / R1',
+        company: 'DeepSeek (China)',
+        type: 'Modelo open-weight · Chat e raciocínio',
+        url: 'https://chat.deepseek.com',
+        preview: 'Modelo chinês open-weight que rivaliza com GPT-4o a uma fração do custo — com raciocínio transparente via R1.',
+        desc: [
+          'DeepSeek é uma empresa chinesa que lançou modelos que causaram impacto significativo no mercado global. O DeepSeek V3 é um modelo de uso geral com desempenho próximo ao GPT-4o; o DeepSeek R1 é especializado em raciocínio, exibindo sua cadeia de pensamento interna de forma transparente.',
+          'O diferencial econômico é expressivo: o treinamento do R1 custou uma fração do que os modelos americanos equivalentes custam, em parte por técnicas de eficiência computacional e, segundo análises da indústria, possivelmente por uso de destilação adversarial de modelos proprietários americanos.',
+          'Por ser open-weight, pode ser rodado localmente ou via API própria (uma das mais baratas do mercado). Levanta preocupações de privacidade para usuários ocidentais dado que é uma empresa sujeita à legislação chinesa.'
+        ],
+        uses: [
+          'Uso local gratuito via Ollama ou LM Studio',
+          'Alternativa de baixo custo para pipelines de produção',
+          'Raciocínio matemático e científico avançado (R1)',
+          'Fine-tuning sem restrições de licença comercial restritiva',
+          'Pesquisa comparativa de capacidades entre modelos'
+        ],
+        cross: ['qwen', 'gemma', 'ollama', 'lm-studio', 'gpt-model', 'claude-model']
+      },
+      qwen: {
+        name: 'Qwen 2.5 / 3',
+        company: 'Alibaba / Tongyi',
+        type: 'Modelo open-weight · Família multilíngue',
+        url: 'https://qwen.readthedocs.io',
+        preview: 'Família de modelos open-weight da Alibaba — forte em multilinguismo, especialmente chinês e português, com versões locais.',
+        desc: [
+          'Qwen (Tongyi Qianwen) é a família de modelos da Alibaba, disponível tanto via API (DashScope) quanto como open-weight para uso local. Notável por sua forte capacidade multilíngue — especialmente em chinês e idiomas não ingleses — e por cobrir um espectro amplo de tamanhos (0.5B a 72B+ parâmetros).',
+          'Qwen 2.5 e 3 incluem modelos especializados: Qwen-VL para visão, Qwen-Audio para processamento de áudio, Qwen-Math para matemática, e Qwen-Coder para programação. Cada variante é fine-tuned para sua especialidade.',
+          'Por ser open-weight com licença comercial permissiva, é amplamente usado em aplicações que precisam de deployment local, customização profunda ou operação em idiomas que modelos americanos servem menos bem.'
+        ],
+        uses: [
+          'Aplicações em português, espanhol e línguas não inglesas',
+          'Deployment local sem dependência de APIs externas',
+          'Processamento de imagens (Qwen-VL)',
+          'Assistentes especializados via fine-tuning',
+          'Aplicações em mercados asiáticos'
+        ],
+        cross: ['deepseek', 'gemma', 'ollama', 'lm-studio', 'ernie']
+      },
+      ernie: {
+        name: 'Ernie 5.0 / Ernie Bot',
+        company: 'Baidu',
+        type: 'Modelo e aplicativo · Ecossistema chinês',
+        url: 'https://yiyan.baidu.com',
+        preview: 'Modelo e chatbot da Baidu — integrado ao motor de busca chinês e ao ecossistema de serviços do grupo.',
+        desc: [
+          'Ernie (Enhanced Representation through kNowledge Integration) é a família de modelos da Baidu. O Ernie Bot é o aplicativo de chat, integrado diretamente com o motor de busca do Baidu — a maior vantagem competitiva da empresa no mercado chinês.',
+          'Possui forte especialização em conhecimento factual chinês, cultural e regulatório, além de integração nativa com outros serviços Baidu (mapas, anúncios, serviços corporativos).',
+          'Para usos fora da China, é menos relevante por questões de acesso, língua e contexto regulatório. Para empresas operando no mercado chinês, é uma peça central do ecossistema de IA disponível.'
+        ],
+        uses: [
+          'Busca com IA no ecossistema Baidu',
+          'Aplicações voltadas ao mercado consumidor chinês',
+          'Integração em produtos Baidu Cloud',
+          'Análise de conteúdo em chinês simplificado'
+        ],
+        cross: ['qwen', 'deepseek', 'kimi']
+      },
+      kimi: {
+        name: 'Kimi',
+        company: 'Moonshot AI (China)',
+        type: 'Modelo e aplicativo · Contexto muito longo',
+        url: 'https://kimi.moonshot.cn',
+        preview: 'Modelo e chat da Moonshot AI — diferencial técnico de janela de contexto de 1M+ tokens para documentos extensos.',
+        desc: [
+          'Kimi é o produto principal da Moonshot AI, startup chinesa de IA. Seu diferencial mais reconhecido é a janela de contexto de 1 milhão de tokens — uma das primeiras a atingir essa escala, antes de ser igualada por Gemini e Claude.',
+          'Especializado em leitura e análise de documentos muito longos: relatórios anuais, processos judiciais, bases de código completas, artigos científicos extensos. O modelo mantém coerência e capacidade de referência cruzada ao longo de contextos muito mais longos do que a maioria dos concorrentes.',
+          'Tem crescimento expressivo no mercado chinês, especialmente em contextos corporativos e acadêmicos que demandam análise de grandes volumes de texto.'
+        ],
+        uses: [
+          'Análise de documentos muito longos (1M tokens)',
+          'Due diligence de contratos e relatórios financeiros',
+          'Análise de bases de código completas',
+          'Pesquisa acadêmica com múltiplos papers simultâneos'
+        ],
+        cross: ['deepseek', 'qwen', 'gemini-model', 'claude-model']
+      },
+      ollama: {
+        name: 'Ollama',
+        company: 'Ollama (open source)',
+        type: 'Ferramenta local · Execução de modelos open-weight',
+        url: 'https://ollama.com',
+        preview: 'Ferramenta open source para rodar modelos de IA localmente no seu computador — sem enviar dados para a internet.',
+        desc: [
+          'Ollama é uma ferramenta de linha de comando que simplifica radicalmente o processo de baixar e executar modelos de linguagem open-weight localmente. Com um único comando, é possível rodar modelos como Llama, DeepSeek, Qwen, Gemma e dezenas de outros no próprio computador.',
+          'O servidor local que o Ollama cria expõe uma API compatível com o formato da OpenAI — o que significa que aplicações desenvolvidas para ChatGPT/OpenAI API podem ser redirecionadas para modelos locais com mudanças mínimas de código.',
+          'Privacidade é o principal caso de uso: nenhum dado é enviado para servidores externos. Useful também para uso offline, ambientes air-gapped e experimentos sem custos por token.'
+        ],
+        uses: [
+          'Execução de LLMs localmente com privacidade total',
+          'Desenvolvimento e testes sem custo por token',
+          'Integração com aplicações via API local',
+          'Experimentos com modelos open-weight variados',
+          'Uso em redes sem internet ou ambientes seguros'
+        ],
+        cross: ['lm-studio', 'deepseek', 'qwen', 'gemma', 'anthropic-api']
+      },
+      'lm-studio': {
+        name: 'LM Studio',
+        company: 'LM Studio (open source)',
+        type: 'Aplicativo desktop · Modelos locais com interface gráfica',
+        url: 'https://lmstudio.ai',
+        preview: 'Interface gráfica para rodar modelos de IA localmente — com gerenciador de modelos e servidor API embutido.',
+        desc: [
+          'LM Studio é uma aplicação desktop (Windows, Mac, Linux) que oferece interface gráfica para baixar, gerenciar e executar modelos de linguagem open-weight localmente — sem linha de comando.',
+          'Funcionalidades incluem: browser de modelos com busca no HuggingFace, download gerenciado, chat interface, e um servidor de API local compatível com o formato OpenAI que pode ser usado por outras aplicações.',
+          'Otimiza automaticamente o uso de GPU (NVIDIA, AMD, Apple Silicon) para a melhor performance possível no hardware disponível. É considerado a opção mais acessível para usuários não técnicos que querem usar IA localmente.'
+        ],
+        uses: [
+          'Uso de modelos open-weight sem linha de comando',
+          'Exploração de diferentes modelos e tamanhos',
+          'Servidor local para aplicações que usam OpenAI API',
+          'Uso privado sem envio de dados para nuvem',
+          'Educação e experimentação com diferentes arquiteturas'
+        ],
+        cross: ['ollama', 'deepseek', 'qwen', 'gemma', 'anthropic-api']
+      },
+      n8n: {
+        name: 'n8n',
+        company: 'n8n GmbH (open source)',
+        type: 'Ferramenta de automação · Fluxos com integração de IA',
+        url: 'https://n8n.io',
+        preview: 'Plataforma de automação de fluxos de trabalho — conecta IA com centenas de serviços via interface visual.',
+        desc: [
+          'n8n é uma plataforma de automação de fluxos de trabalho (workflow automation) que conecta centenas de serviços e APIs — incluindo ferramentas de IA como OpenAI, Anthropic, Google Gemini e HuggingFace — em pipelines visuais.',
+          'É open source (self-hostável) com uma cloud gerenciada como alternativa. Permite criar automações complexas como: "quando receber e-mail → extrair dados com IA → verificar no banco de dados → enviar resposta personalizada → registrar no CRM".',
+          'No contexto de agentes de IA, n8n funciona como orquestrador: define o fluxo de decisão, gerencia quais ferramentas cada etapa usa, e conecta modelos de linguagem a sistemas externos sem que o usuário precise escrever código.'
+        ],
+        uses: [
+          'Automação de fluxos envolvendo IA e serviços externos',
+          'Pipelines de processamento de dados com LLMs',
+          'Chatbots com integração a CRMs e bancos de dados',
+          'Automação de marketing e operações com IA',
+          'Orquestração de agentes multi-ferramenta'
+        ],
+        cross: ['openai-api', 'anthropic-api', 'mcp', 'make', 'zapier']
+      },
+      'github-copilot': {
+        name: 'GitHub Copilot',
+        company: 'Microsoft / GitHub / OpenAI',
+        type: 'Agente de código · Assistente de programação em IDE',
+        url: 'https://github.com/features/copilot',
+        preview: 'Assistente de código integrado ao editor — sugere completions, gera funções e responde perguntas sobre o código.',
+        desc: [
+          'GitHub Copilot é o assistente de programação integrado em IDEs (VS Code, JetBrains, Neovim, etc.) desenvolvido em parceria entre Microsoft, GitHub e OpenAI. É alimentado por modelos GPT e, mais recentemente, por modelos específicos de código.',
+          'Funcionalidades incluem: completions de código linha a linha, geração de funções a partir de comentários, chat contextual sobre o codebase aberto, geração de testes, e o modo "Copilot Workspace" para tarefas de engenharia mais complexas.',
+          'Com mais de 1.3 milhão de usuários pagos corporativos, é o produto de IA para desenvolvimento mais adotado na indústria. Concorre diretamente com o Claude Code (modo editor) e com Cursor AI.'
+        ],
+        uses: [
+          'Autocomplete de código em tempo real no editor',
+          'Geração de testes unitários e de integração',
+          'Explicação e documentação de código existente',
+          'Refatoração assistida por IA',
+          'Chat contextual sobre o projeto completo'
+        ],
+        cross: ['claude-code', 'gpt-model', 'openai-api', 'cursor', 'devin']
+      },
+      devin: {
+        name: 'Devin',
+        company: 'Cognition AI',
+        type: 'Agente · Engenheiro de software autônomo',
+        url: 'https://cognition.ai/devin',
+        preview: 'Agente de engenharia de software autônomo — recebe issues e entrega PRs, com terminal, navegador e editor próprios.',
+        desc: [
+          'Devin é um agente de engenharia de software desenvolvido pela Cognition AI. Diferente de assistentes de código, Devin age como um desenvolvedor autônomo: recebe uma tarefa (bug report, feature request, issue do GitHub), planeja a abordagem, escreve e testa o código, e entrega o resultado como um pull request.',
+          'Opera em um ambiente sandbox com acesso a terminal, navegador web, editor de código e memória de longo prazo — essencialmente um computador virtual onde resolve problemas de engenharia de ponta a ponta.',
+          'Benchmark no SWE-bench (resolução autônoma de issues reais do GitHub) demonstrou capacidade de resolver problemas que outros sistemas falhavam — o que causou impacto significativo na discussão sobre o futuro do trabalho de engenharia de software.'
+        ],
+        uses: [
+          'Resolução autônoma de bugs e issues do GitHub',
+          'Desenvolvimento de features com spec em linguagem natural',
+          'Migração e modernização de codebases',
+          'Tarefas de engenharia repetitivas em lote',
+          'Prototipagem rápida de aplicações completas'
+        ],
+        cross: ['claude-code', 'operator', 'github-copilot', 'cursor', 'mcp']
+      }
+    };
+
+    // ── MARCAR ELEMENTOS COM data-tool ────────────────────────────────────
+    // Mapeamento de texto → chave de ferramenta
+    const TOOL_TEXT_MAP = {
+      'ChatGPT': 'chatgpt',
+      'GPT-5.4': 'gpt-model',
+      'GPT-4o': 'gpt-model',
+      'o3': 'gpt-model',
+      'o4': 'gpt-model',
+      'OpenAI API': 'openai-api',
+      'OpenAI Playground': 'openai-api',
+      'Operator': 'operator',
+      'OpenAI Agents': 'operator',
+      'Claude.ai': 'claude-ai',
+      'Anthropic API': 'anthropic-api',
+      'Claude Sonnet': 'claude-model',
+      'Claude Opus': 'claude-model',
+      'Claude Sonnet 4.6': 'claude-model',
+      'Claude Opus 4.6': 'claude-model',
+      'Claude Code': 'claude-code',
+      'MCP': 'mcp',
+      'Model Context Protocol': 'mcp',
+      'Gemini App': 'gemini-app',
+      'Gemini 3.1': 'gemini-model',
+      'Gemini 3.1 Pro': 'gemini-model',
+      'Google AI Studio': 'google-ai-studio',
+      'Vertex AI': 'vertex-ai',
+      'Gemma': 'gemma',
+      'Gemma 4': 'gemma',
+      'Perplexity': 'perplexity',
+      'Deep Research': 'perplexity',
+      'DeepSeek': 'deepseek',
+      'DeepSeek V3': 'deepseek',
+      'DeepSeek R1': 'deepseek',
+      'Qwen': 'qwen',
+      'Qwen 2.5': 'qwen',
+      'Qwen 3': 'qwen',
+      'Ernie': 'ernie',
+      'Ernie Bot': 'ernie',
+      'Ernie 5.0': 'ernie',
+      'Kimi': 'kimi',
+      'Ollama': 'ollama',
+      'LM Studio': 'lm-studio',
+      'n8n': 'n8n',
+      'GitHub Copilot': 'github-copilot',
+      'Copilot': 'github-copilot',
+      'Devin': 'devin'
+    };
+
+    // Adiciona data-tool nos elementos já existentes (.eco-product strong, etc.)
+    // E faz wrapping de texto nos elementos de prosa
+    function wrapToolMentions(root) {
+      // Primeiro: marcar elementos strong/span dentro de .eco-product e .china-col
+      root.querySelectorAll('.eco-product strong, .china-col strong').forEach(el => {
+        const text = el.textContent.trim();
+        // Verifica correspondência exata ou parcial
+        for (const [phrase, key] of Object.entries(TOOL_TEXT_MAP)) {
+          if (text.includes(phrase) && TOOLS[key]) {
+            el.setAttribute('data-tool', key);
+            el.setAttribute('tabindex', '0');
+            el.setAttribute('role', 'button');
+            el.setAttribute('aria-label', `Ver detalhes: ${TOOLS[key].name}`);
+            break;
+          }
+        }
+      });
+
+      // Segundo: varrer nós de texto em prosa para wrap
+      const SKIP = new Set(['SCRIPT','STYLE','CODE','PRE','A','BUTTON']);
+      const skipClasses = ['gloss-term', 'module-num', 'hero-kicker', 'sidebar-logo'];
+
+      // Ordenar por comprimento decrescente (frases compostas primeiro)
+      const phrases = Object.keys(TOOL_TEXT_MAP).sort((a,b) => b.length - a.length);
+      const escRe = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const toolRegex = new RegExp(
+        '(' + phrases.map(p => `\\b${escRe(p)}\\b`).join('|') + ')',
+        'g'
+      );
+
+      function shouldSkip(node) {
+        let el = node.parentElement;
+        while (el) {
+          if (SKIP.has(el.tagName)) return true;
+          if (skipClasses.some(c => el.classList.contains(c))) return true;
+          if (el.hasAttribute('data-tool')) return true;
+          el = el.parentElement;
+        }
+        return false;
+      }
+
+      const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+        acceptNode(node) {
+          if (!node.nodeValue.trim()) return NodeFilter.FILTER_SKIP;
+          if (!toolRegex.test(node.nodeValue)) return NodeFilter.FILTER_SKIP;
+          toolRegex.lastIndex = 0;
+          if (shouldSkip(node)) return NodeFilter.FILTER_SKIP;
+          return NodeFilter.FILTER_ACCEPT;
+        }
+      });
+
+      const nodes = [];
+      let n;
+      while ((n = walker.nextNode())) nodes.push(n);
+
+      nodes.forEach(textNode => {
+        const text = textNode.nodeValue;
+        toolRegex.lastIndex = 0;
+        const frag = document.createDocumentFragment();
+        let last = 0, m;
+        toolRegex.lastIndex = 0;
+        while ((m = toolRegex.exec(text)) !== null) {
+          const matched = m[0];
+          let toolKey = null;
+          for (const [phrase, key] of Object.entries(TOOL_TEXT_MAP)) {
+            if (phrase.toLowerCase() === matched.toLowerCase()) { toolKey = key; break; }
+          }
+          if (!toolKey || !TOOLS[toolKey]) continue;
+          if (m.index > last) frag.appendChild(document.createTextNode(text.slice(last, m.index)));
+          const span = document.createElement('span');
+          span.setAttribute('data-tool', toolKey);
+          span.setAttribute('tabindex', '0');
+          span.setAttribute('role', 'button');
+          span.setAttribute('aria-label', `Ver detalhes: ${TOOLS[toolKey].name}`);
+          span.textContent = matched;
+          frag.appendChild(span);
+          last = m.index + matched.length;
+        }
+        if (last < text.length) frag.appendChild(document.createTextNode(text.slice(last)));
+        if (last > 0) textNode.parentNode.replaceChild(frag, textNode);
+      });
+    }
+
+    wrapToolMentions(document.body);
+
+    // ── TOOLTIP DE HOVER ─────────────────────────────────────────────────
+    const tooltip = document.getElementById('tool-tooltip');
+    const ttName  = tooltip.querySelector('.tt-name');
+    const ttBody  = tooltip.querySelector('.tt-body');
+    const ttType  = tooltip.querySelector('.tt-type');
+    let tooltipTimer = null;
+    let activeEl = null;
+
+    function positionTooltip(x, y) {
+      const W = tooltip.offsetWidth  || 280;
+      const H = tooltip.offsetHeight || 90;
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+      let left = x + 14;
+      let top  = y - H / 2;
+      if (left + W > vw - 10) left = x - W - 14;
+      if (top < 8) top = 8;
+      if (top + H > vh - 8) top = vh - H - 8;
+      tooltip.style.left = left + 'px';
+      tooltip.style.top  = top  + 'px';
+    }
+
+    function showTooltip(key, x, y) {
+      const t = TOOLS[key];
+      if (!t) return;
+      ttName.textContent = t.name;
+      ttBody.textContent = t.preview;
+      ttType.textContent = t.type;
+      tooltip.classList.add('visible');
+      positionTooltip(x, y);
+    }
+
+    function hideTooltip() {
+      tooltip.classList.remove('visible');
+    }
+
+    document.addEventListener('mouseover', function(e) {
+      const el = e.target.closest('[data-tool]');
+      if (!el) return;
+      activeEl = el;
+      clearTimeout(tooltipTimer);
+      tooltipTimer = setTimeout(() => {
+        showTooltip(el.dataset.tool, e.clientX, e.clientY);
+      }, 300);
+    });
+
+    document.addEventListener('mousemove', function(e) {
+      if (activeEl) positionTooltip(e.clientX, e.clientY);
+    });
+
+    document.addEventListener('mouseout', function(e) {
+      const el = e.target.closest('[data-tool]');
+      if (!el) return;
+      clearTimeout(tooltipTimer);
+      hideTooltip();
+      activeEl = null;
+    });
+
+    // ── MODAL DE CLICK ───────────────────────────────────────────────────
+    const overlay  = document.getElementById('tool-modal-overlay');
+    const modal    = document.getElementById('tool-modal');
+    const btnClose = document.getElementById('tool-modal-close');
+    const mCompany = document.getElementById('tool-modal-company');
+    const mTitle   = document.getElementById('tool-modal-title');
+    const mType    = document.getElementById('tool-modal-type');
+    const mBody    = document.getElementById('tool-modal-body');
+
+    function buildModalBody(t) {
+      let html = '';
+
+      // Descrição
+      html += `<span class="tool-section-label">Descrição</span>`;
+      t.desc.forEach(p => { html += `<p class="tool-modal-desc">${p}</p>`; });
+
+      // Usos atuais
+      html += `<span class="tool-section-label">Usos atuais & casos de uso</span>`;
+      html += `<ul class="tool-use-list">`;
+      t.uses.forEach(u => { html += `<li>${u}</li>`; });
+      html += `</ul>`;
+
+      // Cruzamentos
+      if (t.cross && t.cross.length > 0) {
+        html += `<span class="tool-section-label">Cruzamentos & integrações</span>`;
+        html += `<p class="tool-modal-desc" style="font-size:0.83rem;color:var(--muted);margin-bottom:0.5rem;">Ferramentas e ecossistemas que se integram ou complementam:</p>`;
+        html += `<div class="tool-cross-chips">`;
+        t.cross.forEach(key => {
+          const tc = TOOLS[key];
+          if (tc) html += `<span class="tool-chip" data-tool-link="${key}">${tc.name}</span>`;
+        });
+        html += `</div>`;
+      }
+
+      // Link
+      if (t.url) {
+        html += `<span class="tool-section-label">Referência</span>`;
+        html += `<a class="tool-url" href="${t.url}" target="_blank" rel="noopener noreferrer">↗ ${t.url}</a>`;
+      }
+
+      return html;
+    }
+
+    function openModal(key) {
+      const t = TOOLS[key];
+      if (!t) return;
+      hideTooltip();
+      mCompany.textContent = t.company;
+      mTitle.textContent   = t.name;
+      mType.textContent    = t.type;
+      mBody.innerHTML      = buildModalBody(t);
+      overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      btnClose.focus();
+      // Chips de cruzamento
+      mBody.querySelectorAll('[data-tool-link]').forEach(chip => {
+        chip.addEventListener('click', () => openModal(chip.dataset.toolLink));
+      });
+    }
+
+    function closeModal() {
+      overlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    document.addEventListener('click', function(e) {
+      const el = e.target.closest('[data-tool]');
+      if (el && !el.hasAttribute('data-tool-link')) {
+        openModal(el.dataset.tool);
+        return;
+      }
+      if (e.target === overlay) closeModal();
+    });
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeModal();
+      if (e.key === 'Enter' || e.key === ' ') {
+        const el = document.activeElement;
+        if (el && el.hasAttribute('data-tool') && !el.hasAttribute('data-tool-link')) {
+          e.preventDefault();
+          openModal(el.dataset.tool);
+        }
+      }
+    });
+
+    btnClose.addEventListener('click', closeModal);
+
+    console.log(`[Tools] ${Object.keys(TOOLS).length} ferramentas disponíveis nos modais.`);
+  })();
+  // ── fim modais de ferramentas ─────────────────────────────────────────────
 </script>
 </body>
 </html>
