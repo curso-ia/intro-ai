@@ -1086,6 +1086,8 @@
       <a href="#modulo3">Ecossistemas & Ferramentas</a>
       <a href="#m3-empresas">Produto por Empresa</a>
       <a href="#m3-backend">Backend vs Interface</a>
+      <a href="#m3-geradores">Imagem, Vídeo, Áudio…</a>
+      <a href="#m3-dicas">💡 Dicas Práticas</a>
     </div>
   </div>
   <div class="sidebar-module">
@@ -1590,6 +1592,187 @@
         <li>O MCP da Anthropic está se tornando o padrão para conectar IAs a ferramentas externas, com 97M de instalações.</li>
       </ul>
     </div>
+
+    <!-- ── ALÉM DO TEXTO ──────────────────────────────────────────── -->
+    <h3 class="section-title fade-in" id="m3-geradores">Além do Texto: Motores de Geração de Imagem, Vídeo, Áudio, Voz e Música</h3>
+
+    <div class="prose fade-in">
+      <p>Quando a maioria das pessoas pensa em IA generativa, pensa em chatbots de texto. Mas existe um universo paralelo — e igualmente explosivo — de modelos especializados em gerar outros tipos de conteúdo: imagens fotorrealistas, vídeos de alta resolução, vozes sintéticas indistinguíveis de humanas, e músicas originais completas. Esses <strong>motores de geração multimodal</strong> funcionam de forma tecnicamente distinta dos LLMs e têm seus próprios ecossistemas, players e casos de uso.</p>
+      <p>Entender a diferença importa: enquanto um LLM como o Claude ou o GPT prevê tokens de texto, um modelo de geração de imagem opera em espaços latentes de pixels, e um modelo de síntese de voz trabalha com formas de onda. São arquiteturas diferentes resolvendo problemas diferentes.</p>
+    </div>
+
+    <div class="analogy fade-in">
+      <p><strong>Uma boa analogia:</strong> pense nos LLMs como escritores — dominam a linguagem, a estrutura narrativa, o argumento. Os motores generativos multimodais são como o departamento de arte, o estúdio de áudio e a produtora de vídeo da mesma editora. Cada um tem sua especialidade. Os melhores projetos usam ambos em conjunto.</p>
+    </div>
+
+    <h4 class="subsection fade-in">Geração de Imagem</h4>
+    <div class="prose fade-in">
+      <p>Os geradores de imagem converteram o texto em pixels com uma fidelidade que há cinco anos seria considerada impossível. A tecnologia dominante é a <strong>difusão latente</strong> — um processo que parte de ruído aleatório e vai progressivamente refinando a imagem até corresponder à descrição fornecida. Principais players:</p>
+    </div>
+    <div class="eco-grid fade-in" style="grid-template-columns: repeat(3,1fr);">
+      <div class="eco-col">
+        <div class="eco-company" style="border-color: #6e4fff;">Midjourney</div>
+        <div class="eco-product"><strong>Midjourney v7</strong><br><span class="eco-type">→ gerador de imagem</span></div>
+        <div class="eco-product"><span class="eco-type">Interface via Discord e web. Especializado em imagens artísticas, conceituais e de alta qualidade estética. Favorito de designers e criadores.</span></div>
+      </div>
+      <div class="eco-col">
+        <div class="eco-company" style="border-color: #10a37f;">OpenAI</div>
+        <div class="eco-product"><strong>DALL-E 3 / GPT-4o nativo</strong><br><span class="eco-type">→ gerador de imagem</span></div>
+        <div class="eco-product"><span class="eco-type">Integrado ao ChatGPT e à API OpenAI. Excelente aderência a instruções textuais detalhadas. Forte em composições com texto.</span></div>
+      </div>
+      <div class="eco-col">
+        <div class="eco-company" style="border-color: #c8391a;">Stability AI</div>
+        <div class="eco-product"><strong>Stable Diffusion 3.5</strong><br><span class="eco-type">→ modelo open-weight</span></div>
+        <div class="eco-product"><span class="eco-type">Modelo de difusão com pesos abertos. Pode ser rodado localmente, customizado e fine-tuned. Base de grande parte do ecossistema de geração independente.</span></div>
+      </div>
+      <div class="eco-col">
+        <div class="eco-company" style="border-color: #4285f4;">Google</div>
+        <div class="eco-product"><strong>Imagen 3 / Gemini Imagem</strong><br><span class="eco-type">→ gerador de imagem</span></div>
+        <div class="eco-product"><span class="eco-type">Integrado ao Gemini App e Workspace. Forte em fotorrealismo e fidelidade a descrições complexas.</span></div>
+      </div>
+      <div class="eco-col">
+        <div class="eco-company" style="border-color: #0082fb;">Meta</div>
+        <div class="eco-product"><strong>Emu / Meta AI Imagine</strong><br><span class="eco-type">→ gerador de imagem</span></div>
+        <div class="eco-product"><span class="eco-type">Disponível no ecossistema Meta (WhatsApp, Instagram, Facebook). Foco em uso cotidiano e criação de conteúdo para redes sociais.</span></div>
+      </div>
+      <div class="eco-col">
+        <div class="eco-company" style="border-color: #b8860b;">Adobe</div>
+        <div class="eco-product"><strong>Adobe Firefly</strong><br><span class="eco-type">→ gerador de imagem</span></div>
+        <div class="eco-product"><span class="eco-type">Integrado ao Photoshop, Illustrator e Creative Cloud. Treinado exclusivamente em conteúdo licenciado — diferencial legal para uso comercial.</span></div>
+      </div>
+    </div>
+
+    <h4 class="subsection fade-in">Geração de Vídeo</h4>
+    <div class="prose fade-in">
+      <p>A geração de vídeo é a fronteira mais recente e mais impressionante. Criar segundos de vídeo coerente a partir de uma descrição de texto exige ordens de magnitude mais computação do que gerar uma imagem estática. O campo evoluiu rapidamente de vídeos de 4 segundos e baixa resolução para clipes de alta qualidade com coerência de cena e movimentação de câmera controlável.</p>
+    </div>
+    <table class="compare-table fade-in">
+      <thead><tr><th>Ferramenta</th><th>Empresa</th><th>Destaque</th></tr></thead>
+      <tbody>
+        <tr><td>Sora</td><td>OpenAI</td><td>Até 60s em 1080p; coerência física notável; integrado ao ChatGPT Pro</td></tr>
+        <tr><td>Veo 3</td><td>Google DeepMind</td><td>Geração de vídeo com áudio nativo sincronizado; via Vertex AI</td></tr>
+        <tr><td>Runway Gen-3 Alpha</td><td>Runway ML</td><td>Controle de câmera preciso; líder em produção profissional e cinema</td></tr>
+        <tr><td>Kling 2.0</td><td>Kuaishou (China)</td><td>Vídeos de até 3 minutos; gestos físicos realistas; API para devs</td></tr>
+        <tr><td>Hailuo / Minimax Video</td><td>Minimax (China)</td><td>Qualidade de movimento fluida; forte integração com texto e voz</td></tr>
+        <tr><td>Pika Labs</td><td>Pika</td><td>Foco em facilidade de uso; popular para criadores de conteúdo</td></tr>
+      </tbody>
+    </table>
+
+    <h4 class="subsection fade-in">Síntese de Voz (Text-to-Speech)</h4>
+    <div class="prose fade-in">
+      <p>A síntese de voz com IA deu um salto qualitativo brutal entre 2023 e 2026. Hoje é possível gerar vozes que replicam entonação, ritmo, pausa e emoção de forma indistinguível de locuções humanas — inclusive clonando uma voz específica a partir de poucos segundos de áudio de referência. Isso tem aplicações legítimas (acessibilidade, localização de conteúdo, produção em escala) e riscos sérios (deepfakes de áudio, fraudes de identidade).</p>
+    </div>
+    <div class="news-grid fade-in">
+      <div class="news-card">
+        <div class="news-card-tag">ElevenLabs · Líder de mercado</div>
+        <div class="news-card-title">Síntese de voz multilingue de alta fidelidade</div>
+        <p>API de TTS com clonagem de voz em poucos segundos de áudio. Suporte a 30+ idiomas incluindo português brasileiro. Muito usado para podcasts, audiolivros, locução e acessibilidade.</p>
+      </div>
+      <div class="news-card">
+        <div class="news-card-tag">OpenAI · TTS & GPT-4o Audio</div>
+        <div class="news-card-title">Vozes nativas no GPT-4o e API de voz</div>
+        <p>O GPT-4o processa e gera áudio nativamente (não via pipeline separado). A API TTS da OpenAI oferece vozes expressivas e é integrada ao ChatGPT, inclusive com modo de conversação em voz em tempo real.</p>
+      </div>
+      <div class="news-card">
+        <div class="news-card-tag">Google · WaveNet / Chirp</div>
+        <div class="news-card-title">TTS corporativo via Google Cloud</div>
+        <p>Família de modelos de voz do Google — do WaveNet clássico ao Chirp 3, voltado para aplicações empresariais de alta qualidade com múltiplos idiomas e vozes customizáveis.</p>
+      </div>
+      <div class="news-card">
+        <div class="news-card-tag">Microsoft · Azure TTS</div>
+        <div class="news-card-title">Síntese com controle de emoção e estilo</div>
+        <p>Azure Cognitive Services TTS permite controlar não apenas a voz mas o estilo emocional (neutro, alegre, triste, urgente) e a prosódia. Amplamente adotado em call centers e produtos corporativos.</p>
+      </div>
+    </div>
+
+    <div class="callout callout-danger fade-in">
+      <div class="callout-label">⚠️ Deepfakes de Áudio — Risco Real</div>
+      <p>Com menos de 30 segundos de áudio de referência, qualquer pessoa consegue hoje clonar uma voz com fidelidade suficiente para enganar familiares e sistemas de autenticação por voz. Golpes via WhatsApp imitando familiares ou executivos de empresas já são documentados. <strong>Nunca transfira dinheiro ou autorize ações urgentes apenas baseado em uma ligação ou áudio</strong> — confirme por outro canal.</p>
+    </div>
+
+    <h4 class="subsection fade-in">Geração de Música</h4>
+    <div class="prose fade-in">
+      <p>A geração de música com IA passou de curiosidade acadêmica a produto comercial viável entre 2024 e 2026. Hoje é possível descrever em texto um estilo, instrumentação, mood e duração e receber uma faixa original — com letras, vocais, harmonia e produção completos. Isso levanta questões sérias sobre direitos autorais, o papel dos músicos humanos e a definição de autoria criativa.</p>
+    </div>
+    <div class="risk-grid fade-in">
+      <div class="risk-item low">
+        <div class="risk-label">Plataforma</div>
+        <div class="risk-title">Suno AI</div>
+        <p>Gera músicas completas com letra e vocal a partir de um prompt de texto. Suporta dezenas de gêneros musicais. Interface web simples, com plano gratuito. Muito usado por criadores de conteúdo e educadores.</p>
+      </div>
+      <div class="risk-item low">
+        <div class="risk-label">Plataforma</div>
+        <div class="risk-title">Udio</div>
+        <p>Alternativa ao Suno com foco em qualidade de produção musical. Maior controle sobre arranjo e estilo. Popular entre músicos e produtores como ferramenta de prototipagem e inspiração.</p>
+      </div>
+      <div class="risk-item medium">
+        <div class="risk-label">Ferramenta</div>
+        <div class="risk-title">MusicLM / Lyria (Google)</div>
+        <p>Modelos do Google para geração de música. O Lyria, integrado ao YouTube, é voltado para criadores de vídeo que precisam de trilhas sonoras originais sem preocupações de licenciamento.</p>
+      </div>
+      <div class="risk-item medium">
+        <div class="risk-label">Ferramenta</div>
+        <div class="risk-title">AudioCraft / MusicGen (Meta)</div>
+        <p>Família open-source da Meta para geração de música e efeitos sonoros. Inclui MusicGen (música) e AudioGen (efeitos de ambiente). Pode ser rodado localmente — atrativo para produtores independentes.</p>
+      </div>
+    </div>
+
+    <h4 class="subsection fade-in">Modelos Nativamente Multimodais — A Convergência</h4>
+    <div class="prose fade-in">
+      <p>A tendência mais importante nesse espaço é a <strong>convergência</strong>: modelos como GPT-4o e Gemini 3.1 Ultra já processam e geram texto, imagem, áudio e vídeo em uma única arquitetura unificada, sem pipelines separados. Isso significa que, progressivamente, a distinção entre "modelo de texto" e "motor de imagem" vai se dissolvendo — a IA generativa está caminhando para ser <em>nativa de todas as modalidades</em>.</p>
+    </div>
+
+    <div class="callout callout-info fade-in">
+      <div class="callout-label">📌 Para o usuário prático</div>
+      <p>Se você precisa de geração de imagem para uso profissional com segurança legal: use <strong>Adobe Firefly</strong> (treinado em conteúdo licenciado). Para qualidade artística e criativa: <strong>Midjourney</strong>. Para integração com fluxo de trabalho existente no ChatGPT: <strong>DALL-E 3</strong>. Para voz em português: <strong>ElevenLabs</strong>. Para música de fundo sem preocupação de licença: <strong>Suno</strong> ou <strong>Lyria</strong> do Google.</p>
+    </div>
+
+    <!-- ── SEÇÃO DE DICAS ──────────────────────────────────────────────── -->
+    <h3 class="section-title fade-in" id="m3-dicas">💡 Dicas Práticas para Começar Bem</h3>
+
+    <div class="prose fade-in">
+      <p>Usar IA de forma eficaz é uma habilidade que se aprende — como qualquer ferramenta. As dicas a seguir condensam os erros mais comuns de iniciantes e as práticas que realmente fazem diferença no dia a dia.</p>
+    </div>
+
+    <div class="callout callout-tip fade-in">
+      <div class="callout-label">💡 Dica 1 — Faça a pergunta de apresentação</div>
+      <p>Ao abrir um chat com uma ferramenta de IA pela primeira vez, pergunte — na sua língua nativa — quais são as capacidades, habilidades e funções daquela plataforma, e qual a melhor forma de aproveitá-la nos seus projetos. Cada assistente tem características próprias: modelos de pesquisa, de criação, de código, de análise de documentos. Descobrir isso antes de começar economiza tentativas frustradas.</p>
+    </div>
+
+    <div class="callout callout-tip fade-in">
+      <div class="callout-label">💡 Dica 2 — Peça ajuda para escrever o próprio prompt</div>
+      <p>Antes de tentar resolver um problema diretamente, explique o que você quer e peça ao assistente que te ajude a formular um prompt adequado ao objetivo. Lapidar o prompt antes de executar economiza muitas rodadas de ajuste, reduz consumo de tokens e — como efeito colateral valioso — ensina você a comunicar melhor suas intenções à IA.</p>
+    </div>
+
+    <div class="callout callout-tip fade-in">
+      <div class="callout-label">💡 Dica 3 — Contexto é tudo</div>
+      <p>Quanto mais contexto você fornece, melhor é a resposta. Informe quem você é, qual é o seu nível de conhecimento no assunto, para quem é o resultado e qual o formato desejado. Um prompt com contexto rico é muito mais eficaz do que uma pergunta curta e genérica.</p>
+    </div>
+
+    <div class="callout callout-tip fade-in">
+      <div class="callout-label">💡 Dica 4 — Itere, não recomece</div>
+      <p>Quando a resposta não for exatamente o que você queria, não descarte e recomece do zero. Corrija dentro da mesma conversa: "muito longo, resuma em 3 parágrafos", "adote um tom mais informal", "explique a segunda parte com mais detalhes". O modelo mantém o contexto da sessão — use isso a seu favor.</p>
+    </div>
+
+    <div class="callout callout-tip fade-in">
+      <div class="callout-label">💡 Dica 5 — Verifique informações críticas</div>
+      <p>Modelos de linguagem podem "alucinar" — apresentar informações falsas com total confiança. Para datas, nomes, dados técnicos ou qualquer informação que você usará profissionalmente, sempre confirme em fontes primárias. Use a IA para rascunhar, pesquisar e organizar; o julgamento final é seu.</p>
+    </div>
+
+    <div class="callout callout-tip fade-in">
+      <div class="callout-label">💡 Dica 6 — Peça para pensar passo a passo</div>
+      <p>Se você precisar que a IA resolva algo complexo — um problema de lógica, uma análise, uma estratégia — peça explicitamente que ela "pense passo a passo" antes de dar a resposta final. Isso reduz erros e torna o raciocínio auditável: você consegue identificar onde algo pode ter saído errado.</p>
+    </div>
+
+    <div class="callout callout-tip fade-in">
+      <div class="callout-label">💡 Dica 7 — Use personas e papéis</div>
+      <p>Pedir ao assistente que assuma um papel específico ("atue como revisor editorial", "responda como um especialista em LGPD", "seja um professor explicando para uma criança de 12 anos") calibra o tom, o vocabulário e o nível de profundidade da resposta de forma muito eficaz.</p>
+    </div>
+
+    <div class="callout callout-tip fade-in">
+      <div class="callout-label">💡 Dica 8 — Conheça os pontos fortes de cada ferramenta</div>
+      <p>Nem toda IA é boa em tudo. Algumas são excelentes para código, outras para pesquisa com citações, outras para criação de imagens ou análise de documentos longos. Conhecer os pontos fortes de cada ferramenta — em vez de usar sempre a mesma — multiplica o que você consegue produzir. A seção de ecossistemas deste módulo foi feita exatamente para isso.</p>
+    </div>
   </section>
 
   <!-- MÓDULO 4 (Agentes) - completo -->
@@ -1848,6 +2031,23 @@
       <div class="glossary-item"><div class="glossary-term">Concorrência</div><div class="glossary-def">Empresas que disputam os mesmos clientes oferecendo produtos ou serviços similares.</div></div>
       <div class="glossary-item"><div class="glossary-term">Ação Judicial (lawsuit)</div><div class="glossary-def">Processo na justiça entre duas ou mais partes para resolver um conflito legal.</div></div>
       <div class="glossary-item"><div class="glossary-term">Aplicativo (app)</div><div class="glossary-def">Um programa feito para realizar tarefas específicas, geralmente instalado no celular ou computador.</div></div>
+      <div class="glossary-item"><div class="glossary-term">Difusão Latente</div><div class="glossary-def">Técnica de IA que gera imagens partindo de ruído aleatório e refinando progressivamente até atingir o resultado desejado. É a base de modelos como Stable Diffusion e DALL-E 3.</div></div>
+      <div class="glossary-item"><div class="glossary-term">Modelo de Difusão</div><div class="glossary-def">Tipo de modelo de IA generativa que aprende a gerar imagens (ou outros dados) revertendo progressivamente um processo de adição de ruído. Diferente dos LLMs, que operam com texto e tokens.</div></div>
+      <div class="glossary-item"><div class="glossary-term">Text-to-Image (T2I)</div><div class="glossary-def">Geração de imagem a partir de uma descrição textual (prompt). Exemplos: Midjourney, DALL-E, Stable Diffusion, Firefly.</div></div>
+      <div class="glossary-item"><div class="glossary-term">Text-to-Video (T2V)</div><div class="glossary-def">Geração de vídeo a partir de uma descrição em texto. Exemplos: Sora (OpenAI), Veo 3 (Google), Runway Gen-3, Kling.</div></div>
+      <div class="glossary-item"><div class="glossary-term">Text-to-Speech (TTS)</div><div class="glossary-def">Síntese de voz a partir de texto escrito, produzindo áudio falado. Com IA, atingiu qualidade quase indistinguível de vozes humanas. Exemplos: ElevenLabs, OpenAI TTS, Google WaveNet.</div></div>
+      <div class="glossary-item"><div class="glossary-term">Clonagem de Voz</div><div class="glossary-def">Capacidade de replicar uma voz específica a partir de poucos segundos de áudio de referência. Tecnologia com aplicações legítimas (acessibilidade, localização de conteúdo) e riscos sérios (deepfakes de áudio, golpes).</div></div>
+      <div class="glossary-item"><div class="glossary-term">Prompt (de imagem)</div><div class="glossary-def">Descrição textual fornecida a um gerador de imagem para orientar o resultado. A qualidade e especificidade do prompt afetam diretamente a qualidade da imagem gerada.</div></div>
+      <div class="glossary-item"><div class="glossary-term">Midjourney</div><div class="glossary-def">Plataforma de geração de imagem com IA, acessada via Discord ou web. Conhecida pela qualidade artística e estética das imagens geradas. Uma das mais usadas por designers e criadores.</div></div>
+      <div class="glossary-item"><div class="glossary-term">Stable Diffusion</div><div class="glossary-def">Modelo de difusão latente open-weight desenvolvido pela Stability AI. Por ter pesos abertos, pode ser rodado localmente, customizado e fine-tuned. Base de grande parte do ecossistema de geração independente.</div></div>
+      <div class="glossary-item"><div class="glossary-term">Adobe Firefly</div><div class="glossary-def">Ferramenta de geração de imagem da Adobe, integrada ao Photoshop e Creative Cloud. Treinada exclusivamente em conteúdo licenciado, com garantias de uso comercial seguro.</div></div>
+      <div class="glossary-item"><div class="glossary-term">Sora</div><div class="glossary-def">Modelo de geração de vídeo da OpenAI, capaz de criar vídeos de até 60 segundos em alta resolução a partir de descrições em texto. Integrado ao ChatGPT Pro.</div></div>
+      <div class="glossary-item"><div class="glossary-term">ElevenLabs</div><div class="glossary-def">Plataforma líder em síntese de voz e clonagem de voz com IA. Oferece API de TTS em 30+ idiomas, incluindo português brasileiro. Amplamente usada em podcasts, audiolivros e acessibilidade.</div></div>
+      <div class="glossary-item"><div class="glossary-term">Suno AI</div><div class="glossary-def">Plataforma de geração de música completa (letra, vocal, instrumentação) a partir de prompts de texto. Uma das mais usadas por criadores de conteúdo para trilhas sonoras e músicas originais.</div></div>
+      <div class="glossary-item"><div class="glossary-term">Geração Multimodal</div><div class="glossary-def">Capacidade de um modelo de IA de produzir ou processar múltiplos tipos de conteúdo em uma única arquitetura: texto, imagem, áudio, vídeo. Exemplos: GPT-4o, Gemini Ultra, Ernie 5.0.</div></div>
+      <div class="glossary-item"><div class="glossary-term">Espaço Latente</div><div class="glossary-def">Representação matemática comprimida que um modelo de IA usa internamente para "entender" e manipular conteúdo visual ou sonoro. Modelos de difusão operam nesse espaço antes de gerar a imagem final.</div></div>
+      <div class="glossary-item"><div class="glossary-term">Runway ML</div><div class="glossary-def">Plataforma de geração e edição de vídeo com IA, líder em uso profissional e cinema. Seu modelo Gen-3 Alpha é referência em controle de câmera e qualidade de movimento.</div></div>
+      <div class="glossary-item"><div class="glossary-term">Udio</div><div class="glossary-def">Plataforma de geração de música com IA focada em qualidade de produção musical. Popular entre músicos e produtores como ferramenta de prototipagem criativa.</div></div>
     </div>
   </section>
 
@@ -2332,7 +2532,7 @@
           'Geração de imagens via DALL-E integrado',
           'Automação de tarefas via modo Operator/agêntico'
         ],
-        cross: ['openai-api', 'gpt-model', 'dalle', 'operator', 'claude-ai', 'gemini-app', 'perplexity']
+        cross: ['openai-api', 'gpt-model', 'dalle', 'sora', 'operator', 'claude-ai', 'gemini-app', 'perplexity']
       },
       'openai-api': {
         name: 'OpenAI API',
@@ -2792,6 +2992,168 @@
           'Prototipagem rápida de aplicações completas'
         ],
         cross: ['claude-code', 'operator', 'github-copilot', 'cursor', 'mcp']
+      },
+
+      // ── MOTORES DE GERAÇÃO MULTIMODAL ────────────────────────────────────
+      midjourney: {
+        name: 'Midjourney',
+        company: 'Midjourney Inc.',
+        type: 'Gerador de imagem · Arte e design',
+        url: 'https://midjourney.com',
+        preview: 'Gerador de imagem com IA líder em qualidade artística — acessado via Discord ou web.',
+        desc: [
+          'Midjourney é uma das plataformas de geração de imagem com IA mais renomadas, conhecida pela qualidade estética e artística dos resultados. Opera principalmente via Discord (comandos /imagine) e, mais recentemente, via interface web.',
+          'Usa um modelo de difusão proprietário, treinado com foco em composições visuais de alta qualidade. O modelo v6 e v7 oferecem controle preciso de estilo, iluminação, perspectiva e referências visuais.',
+          'Favorito de designers, ilustradores, diretores de arte e criadores de conteúdo. Não é open-weight — todo processamento ocorre nos servidores da Midjourney.'
+        ],
+        uses: [
+          'Criação de imagens conceituais e artísticas',
+          'Prototipagem visual para design e publicidade',
+          'Geração de referências para projetos criativos',
+          'Ilustração de livros, artigos e materiais didáticos',
+          'Criação de personagens e cenários para games/animação'
+        ],
+        cross: ['dalle', 'stable-diffusion', 'adobe-firefly', 'runway']
+      },
+      dalle: {
+        name: 'DALL-E 3',
+        company: 'OpenAI',
+        type: 'Gerador de imagem · Integrado ao ChatGPT e API',
+        url: 'https://openai.com/dall-e-3',
+        preview: 'Gerador de imagem da OpenAI — excelente aderência a instruções textuais, integrado ao ChatGPT e API.',
+        desc: [
+          'DALL-E 3 é o modelo de geração de imagem da OpenAI, integrado diretamente ao ChatGPT (planos Plus e Pro) e disponível via API. Diferencia-se pela forte aderência às instruções textuais — consegue renderizar textos dentro de imagens com precisão superior a concorrentes.',
+          'O GPT-4o vai além: processa e gera imagens nativamente na mesma arquitetura de texto e áudio, sem um pipeline separado. Isso permite conversas de ida e volta sobre uma imagem, refinamentos iterativos e compreensão de contexto visual profunda.',
+          'Para uso comercial, a OpenAI permite que os usuários detenham os direitos sobre as imagens geradas, desde que respeitem os termos de uso.'
+        ],
+        uses: [
+          'Geração de imagens diretamente no ChatGPT',
+          'Composições com texto legível dentro da imagem',
+          'Fluxos de trabalho integrados com outros recursos do GPT',
+          'Geração em escala via API para produtos digitais',
+          'Edição contextual de imagens via GPT-4o'
+        ],
+        cross: ['chatgpt', 'openai-api', 'midjourney', 'stable-diffusion', 'adobe-firefly']
+      },
+      'stable-diffusion': {
+        name: 'Stable Diffusion',
+        company: 'Stability AI',
+        type: 'Modelo open-weight · Geração de imagem local',
+        url: 'https://stability.ai',
+        preview: 'Modelo de difusão open-weight — pode ser rodado localmente, customizado e é a base do ecossistema independente.',
+        desc: [
+          'Stable Diffusion é um modelo de difusão latente com pesos abertos desenvolvido pela Stability AI. Por ser open-weight, pode ser baixado e rodado localmente em computadores com GPU dedicada, sem enviar dados para servidores externos.',
+          'É a base de um ecossistema enorme de ferramentas, interfaces (Automatic1111, ComfyUI, InvokeAI) e modelos derivados (via fine-tuning), que a comunidade open source criou. Modelos especializados para estilos específicos (anime, fotorrealismo, arte conceitual) proliferaram a partir dele.',
+          'Versões mais recentes (SD 3.5) melhoraram significativamente a coerência de composição e a geração de texto dentro das imagens, que historicamente eram pontos fracos.'
+        ],
+        uses: [
+          'Geração de imagem offline com total privacidade',
+          'Fine-tuning em estilos ou personagens específicos',
+          'Integração em pipelines de produção customizados',
+          'Pesquisa e experimentação sem custo por imagem',
+          'Base para aplicações de geração de conteúdo em larga escala'
+        ],
+        cross: ['midjourney', 'dalle', 'ollama', 'lm-studio']
+      },
+      'adobe-firefly': {
+        name: 'Adobe Firefly',
+        company: 'Adobe',
+        type: 'Gerador de imagem · Uso comercial seguro',
+        url: 'https://firefly.adobe.com',
+        preview: 'Gerador de imagem integrado ao Creative Cloud — treinado em conteúdo licenciado, com garantias para uso comercial.',
+        desc: [
+          'Adobe Firefly é o motor de IA generativa da Adobe, integrado ao Photoshop, Illustrator, Express e outras ferramentas do Creative Cloud. O diferencial estratégico é que foi treinado exclusivamente em conteúdo licenciado da Adobe Stock e domínio público.',
+          'Essa escolha de treinamento torna o Firefly a opção mais segura para uso comercial — eliminando os riscos legais de direitos autorais que afetam outros geradores. Adobe oferece indenização comercial para imagens geradas pelo Firefly em seus produtos pagos.',
+          'As funcionalidades incluem Generative Fill (preencher/expandir partes de uma imagem), Generative Expand (ampliar a tela), Text Effects (estilos de texto artísticos) e geração de vetores no Illustrator.'
+        ],
+        uses: [
+          'Produção de imagens para publicidade e marketing',
+          'Edição avançada no Photoshop com IA (Generative Fill)',
+          'Criação de elementos visuais para materiais corporativos',
+          'Expansão e retoque de fotos de forma não destrutiva',
+          'Design de tipo com Text Effects no Illustrator'
+        ],
+        cross: ['midjourney', 'dalle', 'stable-diffusion']
+      },
+      sora: {
+        name: 'Sora',
+        company: 'OpenAI',
+        type: 'Gerador de vídeo · Text-to-video',
+        url: 'https://openai.com/sora',
+        preview: 'Modelo de geração de vídeo da OpenAI — até 60 segundos em 1080p com coerência física notável.',
+        desc: [
+          'Sora é o modelo de geração de vídeo da OpenAI. A partir de uma descrição em texto (ou imagem de referência), gera vídeos de até 60 segundos em resolução 1080p com coerência visual e física notável — objetos mantêm consistência entre frames, iluminação é coerente, movimentos de câmera são controláveis.',
+          'Tecnicamente usa uma arquitetura de "video diffusion transformer" (DiT) — combinando difusão com transformers — que aprende a modelar não apenas pixels individuais mas patches espaço-temporais, o que confere maior coerência ao longo do tempo.',
+          'Disponível no ChatGPT Pro como funcionalidade integrada, e com acesso via API para desenvolvedores. Compite diretamente com Runway Gen-3 e Veo 3 do Google no mercado de produção profissional.'
+        ],
+        uses: [
+          'Produção de vídeos curtos para marketing e redes sociais',
+          'Prototipagem de storyboards e pré-visualização',
+          'Geração de conteúdo educacional e explicativo',
+          'Criação de efeitos visuais e cenas de fundo',
+          'Exploração criativa de conceitos visuais'
+        ],
+        cross: ['runway', 'dalle', 'chatgpt', 'openai-api']
+      },
+      runway: {
+        name: 'Runway Gen-3 Alpha',
+        company: 'Runway ML',
+        type: 'Gerador de vídeo · Produção profissional',
+        url: 'https://runwayml.com',
+        preview: 'Plataforma líder em geração e edição de vídeo com IA para uso profissional e cinema.',
+        desc: [
+          'Runway ML é uma das plataformas pioneiras em geração de vídeo com IA, muito adotada por profissionais de produção audiovisual, cineastas e estúdios de efeitos visuais. O Gen-3 Alpha é o modelo mais recente, com controle preciso de câmera e qualidade superior em movimento de personagens.',
+          'Além de geração text-to-video, oferece capacidades de edição: motion brush (animar partes específicas de uma imagem estática), inpainting de vídeo, e interpolação de frames.',
+          'Por ser usado em produções profissionais, tem interface mais sofisticada que concorrentes como Pika Labs, com mais controles técnicos mas curva de aprendizado maior.'
+        ],
+        uses: [
+          'Produção de efeitos visuais para cinema e TV',
+          'Geração de conteúdo de vídeo para marketing',
+          'Prototipagem de cenas e storyboards animados',
+          'Animação de imagens estáticas com motion brush',
+          'Criação de vídeos artísticos e experimentais'
+        ],
+        cross: ['sora', 'stable-diffusion', 'midjourney']
+      },
+      elevenlabs: {
+        name: 'ElevenLabs',
+        company: 'ElevenLabs',
+        type: 'Síntese de voz · TTS e clonagem de voz',
+        url: 'https://elevenlabs.io',
+        preview: 'Plataforma líder em síntese de voz com IA — clonagem de voz, 30+ idiomas, API para produtos.',
+        desc: [
+          'ElevenLabs é a plataforma de referência em síntese de voz com IA. Oferece geração de voz extremamente natural, com controle de emoção, ritmo e entonação. A clonagem de voz funciona com apenas 30 segundos de áudio de referência.',
+          'Suporta mais de 30 idiomas, incluindo português brasileiro com qualidade nativa — não apenas tradução de sotaque. A API é amplamente usada em produtos de acessibilidade, podcasts, audiolivros, locução de vídeos e assistentes de voz.',
+          'O principal risco é a possibilidade de uso indevido para deepfakes de áudio. A empresa implementou verificações, mas a tecnologia é suficientemente acessível para que o uso malicioso seja uma preocupação real.'
+        ],
+        uses: [
+          'Locução de vídeos, podcasts e audiolivros',
+          'Síntese de voz em múltiplos idiomas para aplicações globais',
+          'Acessibilidade — conversão de texto longo em áudio',
+          'Assistentes de voz com voz personalizada',
+          'Localização de conteúdo para diferentes mercados'
+        ],
+        cross: ['sora', 'runway', 'openai-api']
+      },
+      suno: {
+        name: 'Suno AI',
+        company: 'Suno Inc.',
+        type: 'Gerador de música · Letra, vocal e instrumentação',
+        url: 'https://suno.com',
+        preview: 'Gera músicas completas com letra e vocal a partir de um prompt de texto — dezenas de gêneros musicais.',
+        desc: [
+          'Suno é uma plataforma de geração de música que produz faixas completas — com letra, vocais humanos, instrumentação e produção — a partir de uma descrição em texto. Suporta dezenas de gêneros: pop, rock, jazz, eletrônica, MPB, samba, funk, e mais.',
+          'O processo é simples: você descreve o estilo, o mood e, opcionalmente, fornece a letra. Em segundos, Suno gera versões da música que podem ser iteradas e refinadas. Plano gratuito disponível com limite de gerações por dia.',
+          'Levanta questões sérias sobre direitos autorais e o futuro dos músicos. Ações judiciais de gravadoras contra a Suno estão em andamento (2025-2026), e o debate sobre uso de dados de música para treinamento está longe de ser resolvido.'
+        ],
+        uses: [
+          'Criação de trilhas sonoras para vídeos e podcasts',
+          'Composição de jingles e músicas para campanhas',
+          'Exploração criativa e prototipagem musical',
+          'Educação musical e experimentação de estilos',
+          'Conteúdo musical original sem preocupações de licença (com ressalvas)'
+        ],
+        cross: ['runway', 'sora', 'elevenlabs']
       }
     };
 
@@ -2840,7 +3202,20 @@
       'n8n': 'n8n',
       'GitHub Copilot': 'github-copilot',
       'Copilot': 'github-copilot',
-      'Devin': 'devin'
+      'Devin': 'devin',
+      // motores de geração multimodal
+      'Midjourney': 'midjourney',
+      'DALL-E 3': 'dalle',
+      'DALL-E': 'dalle',
+      'Stable Diffusion': 'stable-diffusion',
+      'Adobe Firefly': 'adobe-firefly',
+      'Firefly': 'adobe-firefly',
+      'Sora': 'sora',
+      'Runway Gen-3': 'runway',
+      'Runway': 'runway',
+      'ElevenLabs': 'elevenlabs',
+      'Suno': 'suno',
+      'Suno AI': 'suno'
     };
 
     // Adiciona data-tool nos elementos já existentes (.eco-product strong, etc.)
